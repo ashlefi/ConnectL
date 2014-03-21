@@ -22,6 +22,7 @@ public class ConnectLDriver {
 		
 	}
 	
+	/*Allows players to enter a customized name. No Error Checking*/
 	public static String getPlayerName()
 	{
 		String playername;
@@ -33,6 +34,7 @@ public class ConnectLDriver {
 		return playername;
 	}
 	
+	/*Draws a visual representation of the gameboard*/
 	public static void drawGame(int r, int c)
 	{
 		for(int i = 0; i < r; i++)
