@@ -12,15 +12,21 @@ public class ConnectLDriver {
 		int row = a.getRows();
 		int col = a.getColumns();
 		
-		//Loop that manages player turns
-		while(a.getGameState() != 2 || a.getGameState() != 3 || a.getGameState() != 4)
+		
+		int c = -1;
+		int r = -1;
+		
+		Scanner r = new Scanner();
+		System.out.println("In which column would you like to place the checker? 0-" + col -1);
+		r.nextInt();
+		for(int i = row - 1; i >= 0; i--)
 		{
-			handleTurn(Player1);
-			if(a.getGameState() != 1 || a.getGameState() != 4)
-				handleTurn(Player2);
+			if(a.getValinLoc(i, c) == 0)
+				a.placeChecker(i, c);
+				
 		}
 		
-	}
+	} // end of main
 	
 	/*Allows players to enter a customized name. No Error Checking*/
 	public static String getPlayerName()
@@ -42,6 +48,8 @@ public class ConnectLDriver {
 			
 		}
 	}
+	
+	
 
 }
 ;
