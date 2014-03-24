@@ -40,6 +40,8 @@ public class ConnectLGame
 			}
 		}
 		gameState = GAME_STATE_RED_TURN;
+		System.out.println("hello from reset");
+		drawGame(rows, columns);
 	}
 
 	/*gets the state of the game and returns
@@ -88,7 +90,8 @@ public class ConnectLGame
 			gameState = GAME_STATE_BLACK_TURN;
 		}
 
-		updateGame();  // winner?, tie?
+		updateGame();// winner?, tie?
+		drawGame(rows, columns);
 		return true;  // move was successfully made
 	}
 	
@@ -247,7 +250,7 @@ public class ConnectLGame
 		{
 			for ( int j = 0; j < columns; j++ )
 			{
-				if ( data[j][i] == MARK_NONE)
+				if ( data[i][j] == MARK_NONE)
 					count++;	//if there's an available space, then not all are used
 			}
 		}
@@ -256,7 +259,7 @@ public class ConnectLGame
 		return;
 	}
 
-	ArrayList<Integer> getAllPossibleMoves()
+	public ArrayList<Integer> getAllPossibleMoves()
 	{
 		ArrayList<Integer> possiblemoves = new ArrayList<Integer>();
 		
@@ -268,5 +271,25 @@ public class ConnectLGame
 		
 		return possiblemoves;
 	}
-}
+	
+	private void drawGame(int r, int c)
+	{
+		for(int i = 0; i < r; i++)
+		{
+			System.out.println("------------------------------");
+			for(int j = 0; j < c; j++)
+			{
+				System.out.println(getValueinLoc(i,j));
+				if(getValueinLoc(i, j) == MARK_RED)
+					System.out.println("| R |");
+				if(getValueinLoc(i,j) == MARK_BLACK)
+					System.out.println("| B |");
+				if(getValueinLoc(i,j) == MARK_NONE)
+					System.out.println("|   |");
+			}
+		}
+		System.out.println("------------------------------");
+	}
+	
+}// end of class ConnectLGame
 	
