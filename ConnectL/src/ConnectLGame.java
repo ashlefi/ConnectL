@@ -1,5 +1,3 @@
-//Test comment for GIT to make sure I know what I'm doing -- KJ
-
 import java.util.ArrayList;
 
 public class ConnectLGame 
@@ -42,7 +40,6 @@ public class ConnectLGame
 			}
 		}
 		gameState = GAME_STATE_RED_TURN;
-		System.out.println("hello from reset");
 		drawGame(rows, columns);
 	}
 
@@ -91,9 +88,10 @@ public class ConnectLGame
 			data[r][c] = MARK_RED;
 			gameState = GAME_STATE_BLACK_TURN;
 		}
-
-		updateGame();// winner?, tie?
+		
+		System.out.println("Bitch nigga");
 		drawGame(rows, columns);
+		updateGame();// winner?, tie?
 		return true;  // move was successfully made
 	}
 	
@@ -268,7 +266,7 @@ public class ConnectLGame
 		for(int j = 0; j < columns; j++)
 		{
 			if(data[0][j] == MARK_NONE)
-				possiblemoves.add(data[0][j]);
+				possiblemoves.add(j);
 		}
 		
 		return possiblemoves;
@@ -278,19 +276,19 @@ public class ConnectLGame
 	{
 		for(int i = 0; i < r; i++)
 		{
-			System.out.println("------------------------------");
+			System.out.println("----------------------------------------");
 			for(int j = 0; j < c; j++)
 			{
-				System.out.println(getValueinLoc(i,j));
-				if(getValueinLoc(i, j) == MARK_RED)
-					System.out.println("| R |");
-				if(getValueinLoc(i,j) == MARK_BLACK)
-					System.out.println("| B |");
-				if(getValueinLoc(i,j) == MARK_NONE)
-					System.out.println("|   |");
+				if(data[i][j] == MARK_RED)
+					System.out.print("| R |");
+				if(data[i][j] == MARK_BLACK)
+					System.out.print("| B |");
+				if(data[i][j] == MARK_NONE)
+					System.out.print("|   |");
 			}
+			System.out.println(" ");
 		}
-		System.out.println("------------------------------");
+		System.out.println("----------------------------------------");
 	}
 	
 }// end of class ConnectLGame
