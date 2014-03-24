@@ -1,3 +1,5 @@
+//Test comment for GIT to make sure I know what I'm doing -- KJ
+
 import java.util.ArrayList;
 
 public class ConnectLGame 
