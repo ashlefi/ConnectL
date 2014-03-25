@@ -69,7 +69,7 @@ public class ConnectLGame
 		return data [r][c];
 	}
 	
-	/*Leaves an player identification mark in the 
+	/*Leaves a player identification mark in the 
 	 * row and column given. If it is not a valid 
 	 * move, nothing is marked. */
 	public boolean placeChecker (int r, int c) {
@@ -89,7 +89,6 @@ public class ConnectLGame
 			gameState = GAME_STATE_BLACK_TURN;
 		}
 		
-		System.out.println("Bitch nigga");
 		drawGame(rows, columns);
 		updateGame();// winner?, tie?
 		return true;  // move was successfully made
@@ -203,7 +202,7 @@ public class ConnectLGame
 				if (data[i][j] == player && data[i][j+1] == player) 
 				{
 					if((data[i-1][j] == player && data[i-2][j] == player)
-						|| (data[i-11][j+1] == player && data[i-2] [j+1] == player))
+						|| (data[i-1][j+1] == player && data[i-2] [j+1] == player))
 					{
 						if ( player == MARK_RED)
 							gameState = GAME_STATE_RED_WON;

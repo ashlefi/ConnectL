@@ -12,7 +12,8 @@ public class ConnectLDriver {
 		int col = a.getColumns() - 1;
 		Scanner r = new Scanner(System.in);
 		
-		while(a.getGameState() != 2 || a.getGameState() != 3 || a.getGameState() !=4)
+		//While neither player has won and there is no tie
+		while(a.getGameState() != 2 && a.getGameState() != 3 && a.getGameState() !=4)
 		{
 			System.out.println("It is " + Player1 + "'s turn!");
 			
@@ -33,7 +34,7 @@ public class ConnectLDriver {
 				}
 			}
 			
-			if(a.getGameState() != 2 || a.getGameState() !=4) //check if player1 has won before player 2 gets to move.
+			if(a.getGameState() != 2 && a.getGameState() !=4) //check if player1 has won before player 2 gets to move.
 			{
 				System.out.println("It is " + Player2 +"'s turn!");
 				 
@@ -50,7 +51,16 @@ public class ConnectLDriver {
 				}
 			}
 		
-		}
+		} //End of while loop, winner or tie
+		
+		//Print winner or tie status at end of game
+		if(a.getGameState() == 2)
+			System.out.println(Player1 + " wins!");
+		else if (a.getGameState() == 3)
+			System.out.println(Player2 + " wins!");
+		else
+			System.out.println("The game is a tie. You both lose.");
+				
 		r.close();
 		
 	} // end of main
