@@ -63,7 +63,7 @@ public class ConnectLGame
 	/*Gets the Mark. Allows determination of what
 	 * is in a given square in the game  board */
 	public int getValueinLoc(int r, int c) {
-		if ( r < 0 || r > rows|| c < columns|| c > columns) 
+		if ( r < 0 || r >= rows|| c < 0|| c >= columns) 
 				return MARK_ERROR;
 
 		return data [r][c];
@@ -292,4 +292,3 @@ public class ConnectLGame
 	}
 	
 }// end of class ConnectLGame
-	

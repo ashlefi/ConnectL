@@ -25,8 +25,12 @@ public class ConnectLDriver {
 			
 			for(int i = row; i >= 0; i--)
 			{
-				
-				a.placeChecker(i, uc);
+				System.out.println(a.getValueinLoc(i, uc));
+				if(a.getValueinLoc(i,uc) == 0)
+				{
+					a.placeChecker(i, uc);
+					break;
+				}
 			}
 			
 			if(a.getGameState() != 2 || a.getGameState() !=4) //check if player1 has won before player 2 gets to move.
@@ -38,7 +42,11 @@ public class ConnectLDriver {
 				
 				for(int i = row; i >= 0; i--)
 				{
-					a.placeChecker(i, uc);
+					if(a.getValueinLoc(i,uc) == 0)
+					{
+						a.placeChecker(i, uc);
+						break;
+					}
 				}
 			}
 		
@@ -52,10 +60,12 @@ public class ConnectLDriver {
 	{
 		String playername;
 		Scanner s = new Scanner(System.in);
-	
 		System.out.println("Please enter your name");
 		playername = s.next();
 		
 		return playername;
 	}
-}// end of class ConnectLDriver
+
+	
+
+}
