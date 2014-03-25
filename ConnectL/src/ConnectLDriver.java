@@ -2,15 +2,21 @@ import java.util.Scanner;
 
 public class ConnectLDriver {
 
+	private static ConnectLGame a;
+	
 	public static void main(String[] args)
 	{
 		String Player1 = getPlayerName();
 		String Player2 = getPlayerName();
 		
-		ConnectLGame a = new ConnectLGame();
-		int row = a.getRows() - 1;
+		a = new ConnectLGame();
+		int row = a.getRows() -1;
+		int col = a.getColumns() -1;
 		Scanner r = new Scanner(System.in);
 		boolean validMove = true;
+		
+		//draws the initial game board
+		drawGame(row, col);
 		
 		//While neither player has won and there is no tie
 		while(a.getGameState() != 2 && a.getGameState() != 3 && a.getGameState() !=4)
@@ -43,6 +49,7 @@ public class ConnectLDriver {
 				if(a.getValueinLoc(i,uc) == 0)
 				{
 					a.placeChecker(i, uc);
+					drawGame(row, col);
 					break;
 				}
 			}
@@ -72,6 +79,7 @@ public class ConnectLDriver {
 					if(a.getValueinLoc(i,uc) == 0)
 					{
 						a.placeChecker(i, uc);
+						drawGame(row, col);
 						break;
 					}
 				}
@@ -100,6 +108,25 @@ public class ConnectLDriver {
 		playername = s.next();
 		
 		return playername;
+	}
+	
+	public static void drawGame(int r, int c)
+	{
+		for(int i = 0; i <= r; i++)
+		{
+			System.out.println("----------------------------------------");
+			for(int j = 0; j <= c; j++)
+			{
+				if (a.getValueinLoc(i,j) == 1)
+					System.out.print("| R |");
+				if(a.getValueinLoc(i,j) == 2)
+					System.out.print("| B |");
+				if(a.getValueinLoc(i,j) == 0)
+					System.out.print("|   |");
+			}
+			System.out.println(" ");
+		}
+		System.out.println("----------------------------------------");
 	}
 
 	

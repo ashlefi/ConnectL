@@ -40,7 +40,6 @@ public class ConnectLGame
 			}
 		}
 		gameState = GAME_STATE_RED_TURN;
-		drawGame(rows, columns);
 	}
 
 	/*gets the state of the game and returns
@@ -89,7 +88,6 @@ public class ConnectLGame
 			gameState = GAME_STATE_BLACK_TURN;
 		}
 		
-		drawGame(rows, columns);
 		updateGame();// winner?, tie?
 		return true;  // move was successfully made
 	}
@@ -271,23 +269,5 @@ public class ConnectLGame
 		return possiblemoves;
 	}
 	
-	private void drawGame(int r, int c)
-	{
-		for(int i = 0; i < r; i++)
-		{
-			System.out.println("----------------------------------------");
-			for(int j = 0; j < c; j++)
-			{
-				if(data[i][j] == MARK_RED)
-					System.out.print("| R |");
-				if(data[i][j] == MARK_BLACK)
-					System.out.print("| B |");
-				if(data[i][j] == MARK_NONE)
-					System.out.print("|   |");
-			}
-			System.out.println(" ");
-		}
-		System.out.println("----------------------------------------");
-	}
 	
 }// end of class ConnectLGame
