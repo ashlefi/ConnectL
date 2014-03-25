@@ -24,6 +24,19 @@ public class ConnectLDriver {
 			System.out.println("In which column would you like to place the checker? 0-7");
 			uc = r.nextInt();
 			
+			//checking for a valid move
+			if(a.getValueinLoc(0, uc) != 0)
+				validMove = false;
+			while (!validMove){
+				System.out.println("That move is not valid.");
+				System.out.println("These are the available colums for checker placement: "
+						+ a.getAllPossibleMoves());
+				System.out.println("In which column would you like to place the checker? 0-7");
+				uc = r.nextInt();
+				if(a.getValueinLoc(0, uc) == 0)
+					validMove = true;
+			}
+			
 			for(int i = row; i >= 0; i--)
 			{
 				System.out.println(a.getValueinLoc(i, uc));
@@ -40,6 +53,19 @@ public class ConnectLDriver {
 				 
 				System.out.println("In which column would you like to place the checker? 0-7");
 				uc = r.nextInt();
+				
+				//checking for a valid move
+				if(a.getValueinLoc(0, uc) != 0)
+					validMove = false;
+				while (!validMove){
+					System.out.println("That move is not valid.");
+					System.out.println("These are the available colums for checker placement: "
+							+ a.getAllPossibleMoves());
+					System.out.println("In which column would you like to place the checker? 0-7");
+					uc = r.nextInt();
+					if(a.getValueinLoc(0, uc) == 0)
+						validMove = true;
+				}
 				
 				for(int i = row; i >= 0; i--)
 				{

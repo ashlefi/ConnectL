@@ -139,7 +139,7 @@ public class ConnectLGame
 			{		
 				if (data[i][j] == player && data[i][j+1] == player && data[i][j+2] == player) 
 				{
-					if(data[i-1][j+2] == player || data[i+1][j] == player)
+					if(data[i-1][j+2] == player || data[i-1][j] == player)
 					{
 						if ( player == MARK_RED)
 							gameState = GAME_STATE_RED_WON;
