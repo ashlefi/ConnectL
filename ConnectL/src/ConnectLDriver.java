@@ -9,8 +9,8 @@ public class ConnectLDriver {
 		
 		ConnectLGame a = new ConnectLGame();
 		int row = a.getRows() - 1;
-		int col = a.getColumns() - 1;
 		Scanner r = new Scanner(System.in);
+		boolean validMove = true;
 		
 		//While neither player has won and there is no tie
 		while(a.getGameState() != 2 && a.getGameState() != 3 && a.getGameState() !=4)
