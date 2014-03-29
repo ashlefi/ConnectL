@@ -1,46 +1,50 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class ConnectLDriver {
 
 	private static ConnectLGame a;
-	
+	private static Scanner r = new Scanner(System.in);
+
 	public static void main(String[] args)
 	{
 		String Player1 = getPlayerName();
 		String Player2 = getPlayerName();
-		
+
 		a = new ConnectLGame();
 		int row = a.getRows() -1;
 		int col = a.getColumns() -1;
-		Scanner r = new Scanner(System.in);
 		boolean validMove = true;
-		
+		int uc = -1;
+
 		//draws the initial game board
 		drawGame(row, col);
-		
+
 		//While neither player has won and there is no tie
 		while(a.getGameState() != 2 && a.getGameState() != 3 && a.getGameState() !=4)
 		{
+			uc = -1;
 			System.out.println("It is " + Player1 + "'s turn!");
-			
-			int uc = -1; //variable for the user column input
-			
-			System.out.println("These are the available colums for checker placement: " + a.getAllPossibleMoves());
-			System.out.println("In which column would you like to place the checker? 0-7");
-			uc = r.nextInt();
-			
+
+			System.out.println("These are the available colums for checker placement: "
+					+ a.getAllPossibleMoves());
+
+			uc = enterInt();
+
 			//checking for a valid move
-			if(!(a.getAllPossibleMoves()).contains(uc))
+			if(a.getValueinLoc(0, uc) != 0)
 				validMove = false;
-			while (!validMove){
+			while (!validMove)
+			{
 				System.out.println("That move is not valid.");
-				System.out.println("These are the available colums for checker placement: " + a.getAllPossibleMoves());
-				System.out.println("In which column would you like to place the checker? 0-7");
-				uc = r.nextInt();
-				if((a.getAllPossibleMoves()).contains(uc))
+				System.out.println("These are the available colums for checker placement: "
+						+ a.getAllPossibleMoves());
+
+				uc = enterInt();
+
+				if(a.getValueinLoc(0, uc) == 0)
 					validMove = true;
 			}
-			
+
 			for(int i = row; i >= 0; i--)
 			{
 				System.out.println(a.getValueinLoc(i, uc));
@@ -51,27 +55,27 @@ public class ConnectLDriver {
 					break;
 				}
 			}
-			
+
 			if(a.getGameState() != 2 && a.getGameState() !=4) //check if player1 has won before player 2 gets to move.
 			{
 				System.out.println("It is " + Player2 +"'s turn!");
-				 
-				System.out.println("In which column would you like to place the checker? 0-7");
-				uc = r.nextInt();
-				
+
+				uc = enterInt();
+
 				//checking for a valid move
-				if(!(a.getAllPossibleMoves()).contains(uc))
+				if(a.getValueinLoc(0, uc) != 0)
 					validMove = false;
 				while (!validMove){
 					System.out.println("That move is not valid.");
 					System.out.println("These are the available colums for checker placement: "
 							+ a.getAllPossibleMoves());
-					System.out.println("In which column would you like to place the checker? 0-7");
-					uc = r.nextInt();
-					if((a.getAllPossibleMoves()).contains(uc))
+
+					uc = enterInt();
+
+					if(a.getValueinLoc(0, uc) == 0)
 						validMove = true;
 				}
-				
+
 				for(int i = row; i >= 0; i--)
 				{
 					if(a.getValueinLoc(i,uc) == 0)
@@ -82,9 +86,9 @@ public class ConnectLDriver {
 					}
 				}
 			}
-		
+
 		} //End of while loop, winner or tie
-		
+
 		//Print winner or tie status at end of game
 		if(a.getGameState() == 2)
 			System.out.println(Player1 + " wins!");
@@ -92,22 +96,21 @@ public class ConnectLDriver {
 			System.out.println(Player2 + " wins!");
 		else
 			System.out.println("The game is a tie. You both lose.");
-				
+
 		r.close();
-		
+
 	} // end of main
-	
+
 	/*Allows players to enter a customized name. No Error Checking*/
 	public static String getPlayerName()
 	{
 		String playername;
-		Scanner s = new Scanner(System.in);
 		System.out.println("Please enter your name");
-		playername = s.next();
-		
+		playername = r.next();
+
 		return playername;
 	}
-	
+
 	public static void drawGame(int r, int c)
 	{
 		for(int i = 0; i <= r; i++)
@@ -126,7 +129,29 @@ public class ConnectLDriver {
 		}
 		System.out.println("----------------------------------------");
 	}
+	public static int enterInt()
+	{
+		boolean enterint = false;
+		int myint = -1;
+		while(!enterint)
+		{
+			try
+			{
+				System.out.println("In which column would you like to place the checker? 0-7");
+				myint = r.nextInt();
+				enterint = true;
+			}
+			catch(InputMismatchException e)
+			{
+				enterint = false;
+				r.nextLine();
+			}
+		}
+		enterint = false;
 
-	
+		return myint;
+	}
+
+
 
 }
