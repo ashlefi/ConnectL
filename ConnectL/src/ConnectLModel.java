@@ -42,7 +42,8 @@ public class ConnectLModel extends JApplet implements MouseListener
 					g.fillRect(j*sqWid, i*sqHgt, sqWid, sqHgt);
 
 				}
-
+			}
+			
 			for (int r=0; r< 3; r++) {
 				for ( int c = 0; c< 3; c++) {
 					if ( game.getValueinLoc(r, c) == game.MARK_BLACK) {
