@@ -3,7 +3,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-public class guiTTT extends JApplet implements MouseListener {
+public class ConnectLModel extends JApplet implements MouseListener {
 
 	/**
 	 * 
@@ -12,7 +12,7 @@ public class guiTTT extends JApplet implements MouseListener {
 	Canvas canvas;
 	int rows, cols; // number of rows and columns for the board
 	JTextField gameStatus;
-	tttGame game;
+	ConnectLGame game;
 	int w, h;
 
 	private class Canvas extends JPanel {
@@ -27,11 +27,19 @@ public class guiTTT extends JApplet implements MouseListener {
 			w = getWidth();
 			h = getHeight();
 
-			g.setColor(Color.BLUE);
-			g.drawLine(w/3, 0, w/3, h);
-			g.drawLine(2*w/3, 0, 2*w/3, h);
-			g.drawLine(0, h/3, w, h/3);
-			g.drawLine(0,2*h/3,w,2*h/3);
+			g.setColor( Color.BLUE);
+			g.drawLine(10,10,200,200);
+
+			sqWid = w/cols;
+			sqHgt = h/rows;
+
+			for (int i=0; i < rows; i++) {
+				for (int j = 0; j < cols; j++) {
+					if ( (i+j)%2 == 0)  g.setColor(Color.blue);
+					else g.setColor(Color.red);
+					g.fillRect(j*sqWid, i*sqHgt, sqWid, sqHgt);
+
+				}
 
 			for (int r=0; r< 3; r++) {
 				for ( int c = 0; c< 3; c++) {
