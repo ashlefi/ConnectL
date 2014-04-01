@@ -4,32 +4,49 @@ public class ConnectLDriver {
 
 	private static ConnectLGame a;
 	private static Scanner r = new Scanner(System.in);
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> de3a20e5f8cff54f5fdb73c0dcfe629b5f6ff416
 	public static void main(String[] args)
 	{
 		String Player1 = getPlayerName();
 		String Player2 = getPlayerName();
-		
+
 		a = new ConnectLGame();
 		int row = a.getRows() -1;
 		int col = a.getColumns() -1;
 		boolean validMove = true;
 		int uc = -1;
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> de3a20e5f8cff54f5fdb73c0dcfe629b5f6ff416
 		//draws the initial game board
 		drawGame(row, col);
-		
+
 		//While neither player has won and there is no tie
 		while(a.getGameState() != 2 && a.getGameState() != 3 && a.getGameState() !=4)
 		{
 			uc = -1;
 			System.out.println("It is " + Player1 + "'s turn!");
+<<<<<<< HEAD
 			
 			System.out.println("These are the available colums for checker placement: "
 					+ a.getAllPossibleMoves());
 			
 			uc = enterInt();
 			
+=======
+
+			System.out.println("These are the available colums for checker placement: "
+					+ a.getAllPossibleMoves());
+
+			uc = enterInt();
+
+>>>>>>> de3a20e5f8cff54f5fdb73c0dcfe629b5f6ff416
 			//checking for a valid move
 			if(a.getValueinLoc(0, uc) != 0)
 				validMove = false;
@@ -38,13 +55,19 @@ public class ConnectLDriver {
 				System.out.println("That move is not valid.");
 				System.out.println("These are the available colums for checker placement: "
 						+ a.getAllPossibleMoves());
+<<<<<<< HEAD
 				
 				uc = enterInt();
 				
+=======
+
+				uc = enterInt();
+
+>>>>>>> de3a20e5f8cff54f5fdb73c0dcfe629b5f6ff416
 				if(a.getValueinLoc(0, uc) == 0)
 					validMove = true;
 			}
-			
+
 			for(int i = row; i >= 0; i--)
 			{
 				System.out.println(a.getValueinLoc(i, uc));
@@ -55,13 +78,19 @@ public class ConnectLDriver {
 					break;
 				}
 			}
-			
+
 			if(a.getGameState() != 2 && a.getGameState() !=4) //check if player1 has won before player 2 gets to move.
 			{
 				System.out.println("It is " + Player2 +"'s turn!");
+<<<<<<< HEAD
 				 
 				uc = enterInt();
 				
+=======
+
+				uc = enterInt();
+
+>>>>>>> de3a20e5f8cff54f5fdb73c0dcfe629b5f6ff416
 				//checking for a valid move
 				if(a.getValueinLoc(0, uc) != 0)
 					validMove = false;
@@ -69,13 +98,19 @@ public class ConnectLDriver {
 					System.out.println("That move is not valid.");
 					System.out.println("These are the available colums for checker placement: "
 							+ a.getAllPossibleMoves());
+<<<<<<< HEAD
 					
 					uc = enterInt();
 					
+=======
+
+					uc = enterInt();
+
+>>>>>>> de3a20e5f8cff54f5fdb73c0dcfe629b5f6ff416
 					if(a.getValueinLoc(0, uc) == 0)
 						validMove = true;
 				}
-				
+
 				for(int i = row; i >= 0; i--)
 				{
 					if(a.getValueinLoc(i,uc) == 0)
@@ -86,9 +121,9 @@ public class ConnectLDriver {
 					}
 				}
 			}
-		
+
 		} //End of while loop, winner or tie
-		
+
 		//Print winner or tie status at end of game
 		if(a.getGameState() == 2)
 			System.out.println(Player1 + " wins!");
@@ -96,21 +131,25 @@ public class ConnectLDriver {
 			System.out.println(Player2 + " wins!");
 		else
 			System.out.println("The game is a tie. You both lose.");
-				
+
 		r.close();
-		
+
 	} // end of main
-	
+
 	/*Allows players to enter a customized name. No Error Checking*/
 	public static String getPlayerName()
 	{
 		String playername;
 		System.out.println("Please enter your name");
 		playername = r.next();
+<<<<<<< HEAD
 		
+=======
+
+>>>>>>> de3a20e5f8cff54f5fdb73c0dcfe629b5f6ff416
 		return playername;
 	}
-	
+
 	public static void drawGame(int r, int c)
 	{
 		for(int i = 0; i <= r; i++)
@@ -148,10 +187,16 @@ public class ConnectLDriver {
 			}
 		}
 		enterint = false;
+<<<<<<< HEAD
 	
 		return myint;
 	}
+=======
 
-	
+		return myint;
+	}
+
+>>>>>>> de3a20e5f8cff54f5fdb73c0dcfe629b5f6ff416
+
 
 }

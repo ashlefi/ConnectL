@@ -19,7 +19,7 @@ public class ConnectLGame
 	private int [][] data = new int [rows][columns];  //ConnectL Board
 	private int gameState;  //Keeps track of the different states of the game
 
-	
+
 	/*Constructor calls reset to reset 
 	 * the board to a blank state.  */
 	public ConnectLGame() 
@@ -47,13 +47,13 @@ public class ConnectLGame
 	public int	 getGameState(){
 		return gameState;
 	}
-	
+
 	/*Rows and Columns getters*/
 	public int getRows()
 	{
 		return rows;
 	}
-	
+
 	public int getColumns()
 	{
 		return columns;
@@ -67,7 +67,7 @@ public class ConnectLGame
 
 		return data [r][c];
 	}
-	
+
 	/*Leaves a player identification mark in the 
 	 * row and column given. If it is not a valid 
 	 * move, nothing is marked. */
@@ -87,12 +87,12 @@ public class ConnectLGame
 			data[r][c] = MARK_RED;
 			gameState = GAME_STATE_BLACK_TURN;
 		}
-		
+
 		updateGame();// winner?, tie?
 		return true;  // move was successfully made
 	}
-	
-	
+
+
 	/*Checks for an L that looks like this:
 	 * 
 	 *         XXX     or   XXX
@@ -150,7 +150,7 @@ public class ConnectLGame
 		}
 		return false;
 	}
-	
+
 	/*Checks for an L that looks like this:
 	 * 
 	 *    XX			XX
@@ -181,7 +181,7 @@ public class ConnectLGame
 		}
 		return false;
 	}
-	
+
 	/*Checks for an L that looks like this:
 	 * 
 	 *    X			     X
@@ -194,7 +194,7 @@ public class ConnectLGame
 	{
 		for(int i = 2; i < rows; i++)
 		{
-	
+
 			for(int j = 0; j < columns - 1; j++)
 			{		
 				if (data[i][j] == player && data[i][j+1] == player) 
@@ -241,7 +241,7 @@ public class ConnectLGame
 			return;
 		if (check2A3U(MARK_BLACK)) 
 			return;
-		
+
 		// check for a tie - if all cells are Marked.
 		for (int i = 0; i < rows; i++)
 		{
@@ -252,22 +252,22 @@ public class ConnectLGame
 			}
 		}
 		if (count == 0) gameState = GAME_STATE_TIE;
-		
+
 		return;
 	}
 
 	public ArrayList<Integer> getAllPossibleMoves()
 	{
 		ArrayList<Integer> possiblemoves = new ArrayList<Integer>();
-		
+
 		for(int j = 0; j < columns; j++)
 		{
 			if(data[0][j] == MARK_NONE)
 				possiblemoves.add(j);
 		}
-		
+
 		return possiblemoves;
 	}
-	
-	
+
+
 }// end of class ConnectLGame
