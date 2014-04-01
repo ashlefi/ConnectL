@@ -21,7 +21,7 @@ public class ConnectLDriver {
 		drawGame(row, col);
 
 		//While neither player has won and there is no tie
-		while(a.getGameState() != 2 && a.getGameState() != 3 && a.getGameState() !=4)
+		while(a.getGameState() != a.GAME_STATE_RED_WON && a.getGameState() != a.GAME_STATE_BLACK_WON && a.getGameState() != a.GAME_STATE_TIE)
 		{
 			uc = -1;
 			System.out.println("It is " + Player1 + "'s turn!");
@@ -37,7 +37,7 @@ public class ConnectLDriver {
 			uc = enterInt();
 
 			//checking for a valid move
-			if(a.getValueinLoc(0, uc) != 0)
+			if(a.getValueinLoc(0, uc) != a.MARK_NONE)
 				validMove = false;
 			while (!validMove)
 			{
@@ -47,14 +47,14 @@ public class ConnectLDriver {
 
 				uc = enterInt();
 
-				if(a.getValueinLoc(0, uc) == 0)
+				if(a.getValueinLoc(0, uc) == a.MARK_NONE)
 					validMove = true;
 			}
 
 			for(int i = row; i >= 0; i--)
 			{
 				System.out.println(a.getValueinLoc(i, uc));
-				if(a.getValueinLoc(i,uc) == 0)
+				if(a.getValueinLoc(i,uc) == a.MARK_NONE)
 				{
 					a.placeChecker(i, uc);
 					drawGame(row, col);
@@ -62,14 +62,14 @@ public class ConnectLDriver {
 				}
 			}
 
-			if(a.getGameState() != 2 && a.getGameState() !=4) //check if player1 has won before player 2 gets to move.
+			if(a.getGameState() != a.GAME_STATE_RED_WON && a.getGameState() != a.GAME_STATE_TIE) //check if player1 has won before player 2 gets to move.
 			{
 				System.out.println("It is " + Player2 +"'s turn!");
 				 
 				uc = enterInt();
 				
 				//checking for a valid move
-				if(a.getValueinLoc(0, uc) != 0)
+				if(a.getValueinLoc(0, uc) != a.MARK_NONE)
 					validMove = false;
 				while (!validMove){
 					System.out.println("That move is not valid.");
@@ -78,13 +78,13 @@ public class ConnectLDriver {
 	
 					uc = enterInt();
 
-					if(a.getValueinLoc(0, uc) == 0)
+					if(a.getValueinLoc(0, uc) == a.MARK_NONE)
 						validMove = true;
 				}
 
 				for(int i = row; i >= 0; i--)
 				{
-					if(a.getValueinLoc(i,uc) == 0)
+					if(a.getValueinLoc(i,uc) == a.MARK_NONE)
 					{
 						a.placeChecker(i, uc);
 						drawGame(row, col);
@@ -96,9 +96,9 @@ public class ConnectLDriver {
 		} //End of while loop, winner or tie
 
 		//Print winner or tie status at end of game
-		if(a.getGameState() == 2)
+		if(a.getGameState() == a.GAME_STATE_RED_WON)
 			System.out.println(Player1 + " wins!");
-		else if (a.getGameState() == 3)
+		else if (a.getGameState() == a.GAME_STATE_BLACK_WON)
 			System.out.println(Player2 + " wins!");
 		else
 			System.out.println("The game is a tie. You both lose.");
@@ -123,11 +123,11 @@ public class ConnectLDriver {
 			System.out.println("----------------------------------------");
 			for(int j = 0; j <= c; j++)
 			{
-				if (a.getValueinLoc(i,j) == 1)
+				if (a.getValueinLoc(i,j) == a.MARK_RED)
 					System.out.print("| R |");
-				if(a.getValueinLoc(i,j) == 2)
+				if(a.getValueinLoc(i,j) == a.MARK_BLACK)
 					System.out.print("| B |");
-				if(a.getValueinLoc(i,j) == 0)
+				if(a.getValueinLoc(i,j) == a.game.MARK_NONE)
 					System.out.print("|   |");
 			}
 			System.out.println(" ");

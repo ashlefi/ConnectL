@@ -78,6 +78,8 @@ public class ConnectLModel extends JApplet implements MouseListener
 		game = new ConnectLGame();
 		createComponents();
 		updateStatus();
+		rows = game.getRows();
+		cols = game.getCols(); 
 	}
 	void updateStatus()
 	{
