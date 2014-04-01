@@ -84,11 +84,11 @@ public class ConnectLModel extends JApplet implements MouseListener
 		String status;
 		if ( game.getGameState() == game.GAME_STATE_BLACK_TURN)
 			status = "O's Turn!";
-		else if (game.getGameState() == tttGame.GAME_STATE_X_TURN)
+		else if (game.getGameState() == game.GAME_STATE_RED_TURN)
 			status = " X's Turn";
-		else if (game.getGameState() == tttGame.GAME_STATE_O_WON )
+		else if (game.getGameState() == game.GAME_STATE_BLACK_WON )
 			status = "O is the winner";
-		else if (game.getGameState() == tttGame.GAME_STATE_X_WON )
+		else if (game.getGameState() == game.GAME_STATE_RED_WON )
 			status = "X is the winner"; 
 		else
 			status = "Tie Game";

@@ -1,14 +1,11 @@
-import java.util.*;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class ConnectLDriver {
 
 	private static ConnectLGame a;
 	private static Scanner r = new Scanner(System.in);
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> de3a20e5f8cff54f5fdb73c0dcfe629b5f6ff416
 	public static void main(String[] args)
 	{
 		String Player1 = getPlayerName();
@@ -19,11 +16,7 @@ public class ConnectLDriver {
 		int col = a.getColumns() -1;
 		boolean validMove = true;
 		int uc = -1;
-<<<<<<< HEAD
-		
-=======
 
->>>>>>> de3a20e5f8cff54f5fdb73c0dcfe629b5f6ff416
 		//draws the initial game board
 		drawGame(row, col);
 
@@ -32,21 +25,17 @@ public class ConnectLDriver {
 		{
 			uc = -1;
 			System.out.println("It is " + Player1 + "'s turn!");
-<<<<<<< HEAD
 			
 			System.out.println("These are the available colums for checker placement: "
 					+ a.getAllPossibleMoves());
 			
 			uc = enterInt();
-			
-=======
 
 			System.out.println("These are the available colums for checker placement: "
 					+ a.getAllPossibleMoves());
 
 			uc = enterInt();
 
->>>>>>> de3a20e5f8cff54f5fdb73c0dcfe629b5f6ff416
 			//checking for a valid move
 			if(a.getValueinLoc(0, uc) != 0)
 				validMove = false;
@@ -55,15 +44,9 @@ public class ConnectLDriver {
 				System.out.println("That move is not valid.");
 				System.out.println("These are the available colums for checker placement: "
 						+ a.getAllPossibleMoves());
-<<<<<<< HEAD
-				
-				uc = enterInt();
-				
-=======
 
 				uc = enterInt();
 
->>>>>>> de3a20e5f8cff54f5fdb73c0dcfe629b5f6ff416
 				if(a.getValueinLoc(0, uc) == 0)
 					validMove = true;
 			}
@@ -82,15 +65,9 @@ public class ConnectLDriver {
 			if(a.getGameState() != 2 && a.getGameState() !=4) //check if player1 has won before player 2 gets to move.
 			{
 				System.out.println("It is " + Player2 +"'s turn!");
-<<<<<<< HEAD
 				 
 				uc = enterInt();
 				
-=======
-
-				uc = enterInt();
-
->>>>>>> de3a20e5f8cff54f5fdb73c0dcfe629b5f6ff416
 				//checking for a valid move
 				if(a.getValueinLoc(0, uc) != 0)
 					validMove = false;
@@ -98,15 +75,9 @@ public class ConnectLDriver {
 					System.out.println("That move is not valid.");
 					System.out.println("These are the available colums for checker placement: "
 							+ a.getAllPossibleMoves());
-<<<<<<< HEAD
-					
-					uc = enterInt();
-					
-=======
-
+	
 					uc = enterInt();
 
->>>>>>> de3a20e5f8cff54f5fdb73c0dcfe629b5f6ff416
 					if(a.getValueinLoc(0, uc) == 0)
 						validMove = true;
 				}
@@ -142,11 +113,6 @@ public class ConnectLDriver {
 		String playername;
 		System.out.println("Please enter your name");
 		playername = r.next();
-<<<<<<< HEAD
-		
-=======
-
->>>>>>> de3a20e5f8cff54f5fdb73c0dcfe629b5f6ff416
 		return playername;
 	}
 
@@ -187,16 +153,8 @@ public class ConnectLDriver {
 			}
 		}
 		enterint = false;
-<<<<<<< HEAD
-	
-		return myint;
-	}
-=======
 
 		return myint;
 	}
-
->>>>>>> de3a20e5f8cff54f5fdb73c0dcfe629b5f6ff416
-
 
 }
