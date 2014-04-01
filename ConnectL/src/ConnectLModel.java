@@ -11,9 +11,10 @@ public class ConnectLModel extends JApplet implements MouseListener
 	 */
 	private static final long serialVersionUID = 1L;
 	Canvas canvas;
-	int rows, cols; // number of rows and columns for the board
 	JTextField gameStatus;
 	ConnectLGame game;
+	int rows = 6; //game.getRows();
+	int cols = 8; //game.getColumns(); // number of rows and columns for the board
 	int w, h;
 
 	private class Canvas extends JPanel 
@@ -44,15 +45,15 @@ public class ConnectLModel extends JApplet implements MouseListener
 				}
 			}
 			
-			for (int r=0; r< 3; r++) {
-				for ( int c = 0; c< 3; c++) {
+			for (int r = 0; r < 6; r++) {
+				for ( int c = 0; c < 8; c++) {
 					if ( game.getValueinLoc(r, c) == game.MARK_BLACK) {
 						g.setColor(Color.WHITE);
-						g.fillOval(c*w/3, r*h/3, w/3, h/3);
+						g.fillOval(c*w/8, r*h/6, w/8, h/6);
 					}
 					if (game.getValueinLoc(r, c) == game.MARK_RED) {
 						g.setColor(Color.BLACK);
-						g.fillOval(c*w/3, r*h/3, w/3, h/3);
+						g.fillOval(c*w/8, r*h/6, w/8, h/6);
 					}
 				}
 			}
@@ -124,14 +125,19 @@ public class ConnectLModel extends JApplet implements MouseListener
 	public void mouseClicked(MouseEvent arg0)
 	{
 		int x = arg0.getX();
-		int y = arg0.getY();
 
-		int col = x / (w/3);
-		int row = y / (h/3);
-		game.placeChecker(row, col);
-		updateStatus();
-		canvas.repaint();
-	}	
+		int col = (int)(x / (w/8));
+		int row = -1;
+		
+		for (int i = 0; i < game.getRows(); i++){
+			if(game.getValueinLoc(i, col) == 0)
+				row = i;
+		}
+		if (game.placeChecker(row, col)){
+			updateStatus();
+			canvas.repaint();
+		}
+	}
 
 
 	public void mouseEntered(MouseEvent arg0) 
