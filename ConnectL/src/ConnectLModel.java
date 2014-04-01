@@ -19,8 +19,6 @@ public class ConnectLModel extends JApplet implements MouseListener
 
 	private class Canvas extends JPanel 
 	{
-		private static final long serialVersionUID = 1L;
-
 		public void paintComponent(Graphics g) 
 		{
 			super.paintComponent(g);
@@ -105,8 +103,10 @@ public class ConnectLModel extends JApplet implements MouseListener
 		JPanel uip = new JPanel();
 		uip.setLayout(new FlowLayout());
 		gameStatus  = new JTextField(12);
+		JLabel gameLabel = new JLabel("Let the game begin!");
 	
 		JButton b1 = new JButton("New Game");
+		uip.add(gameLabel);
 		uip.add( new JLabel("status"));
 		uip.add(gameStatus);
 		uip.add(b1);
