@@ -19,6 +19,8 @@ public class ConnectLModel extends JApplet implements MouseListener
 
 	private class Canvas extends JPanel 
 	{
+		private static final long serialVersionUID = 1L;
+
 		public void paintComponent(Graphics g) 
 		{
 			super.paintComponent(g);
@@ -42,14 +44,14 @@ public class ConnectLModel extends JApplet implements MouseListener
 
 				}
 			}
-			
+
 			for (int r = 0; r < 6; r++) {
 				for ( int c = 0; c < 8; c++) {
-					if ( game.getValueinLoc(r, c) == game.MARK_BLACK) {
+					if ( game.getValueinLoc(r, c) == ConnectLGame.MARK_BLACK) {
 						g.setColor(Color.WHITE);
 						g.fillOval(c*w/8, r*h/6, w/8, h/6);
 					}
-					if (game.getValueinLoc(r, c) == game.MARK_RED) {
+					if (game.getValueinLoc(r, c) == ConnectLGame.MARK_RED) {
 						g.setColor(Color.BLACK);
 						g.fillOval(c*w/8, r*h/6, w/8, h/6);
 					}
@@ -78,19 +80,17 @@ public class ConnectLModel extends JApplet implements MouseListener
 		game = new ConnectLGame();
 		createComponents();
 		updateStatus();
-		rows = game.getRows();
-		cols = game.getCols(); 
 	}
 	void updateStatus()
 	{
 		String status;
-		if ( game.getGameState() == game.GAME_STATE_BLACK_TURN)
+		if ( game.getGameState() == ConnectLGame.GAME_STATE_BLACK_TURN)
 			status = "O's Turn!";
-		else if (game.getGameState() == game.GAME_STATE_RED_TURN)
+		else if (game.getGameState() == ConnectLGame.GAME_STATE_RED_TURN)
 			status = " X's Turn";
-		else if (game.getGameState() == game.GAME_STATE_BLACK_WON )
+		else if (game.getGameState() == ConnectLGame.GAME_STATE_BLACK_WON )
 			status = "O is the winner";
-		else if (game.getGameState() == game.GAME_STATE_RED_WON )
+		else if (game.getGameState() == ConnectLGame.GAME_STATE_RED_WON )
 			status = "X is the winner"; 
 		else
 			status = "Tie Game";
@@ -103,12 +103,10 @@ public class ConnectLModel extends JApplet implements MouseListener
 		content.setLayout(new BorderLayout());
 		this.setSize(400,400);
 		JPanel uip = new JPanel();
-		uip.setLayout(new FlowLayout());
+		uip.setLayout(new FlowLayout()); 
 		gameStatus  = new JTextField(12);
-		JLabel gameLabel = new JLabel("Let the game begin!");
-	
+
 		JButton b1 = new JButton("New Game");
-		uip.add(gameLabel);
 		uip.add( new JLabel("status"));
 		uip.add(gameStatus);
 		uip.add(b1);
@@ -130,7 +128,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 
 		int col = (int)(x / (w/8));
 		int row = -1;
-		
+
 		for (int i = 0; i < game.getRows(); i++){
 			if(game.getValueinLoc(i, col) == 0)
 				row = i;
@@ -155,5 +153,4 @@ public class ConnectLModel extends JApplet implements MouseListener
 
 	public void mouseReleased(MouseEvent arg0) 
 	{}
-	}
 }
