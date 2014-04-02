@@ -12,6 +12,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 	private static final long serialVersionUID = 1L;
 	Canvas canvas;
 	JTextField gameStatus;
+	JLabel gameLabel = new JLabel("Let the game begin!", SwingConstants.LEFT);
 	ConnectLGame game;
 	int rows = 6; //game.getRows();
 	int cols = 8; //game.getColumns(); // number of rows and columns for the board
@@ -19,7 +20,6 @@ public class ConnectLModel extends JApplet implements MouseListener
 
 	private class Canvas extends JPanel 
 	{
-		private static final long serialVersionUID = 1L;
 
 		public void paintComponent(Graphics g) 
 		{
@@ -70,6 +70,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 				game = new ConnectLGame();
 				updateStatus();
 				canvas.repaint();
+				gameLabel.setText("Let the game begin!");
 			}
 			// invoke repaint command here
 		}
@@ -101,12 +102,13 @@ public class ConnectLModel extends JApplet implements MouseListener
 	{
 		JPanel content = new JPanel();
 		content.setLayout(new BorderLayout());
-		this.setSize(400,400);
+		this.setSize(800,600);
 		JPanel uip = new JPanel();
 		uip.setLayout(new FlowLayout()); 
 		gameStatus  = new JTextField(12);
 
 		JButton b1 = new JButton("New Game");
+		uip.add(gameLabel);
 		uip.add( new JLabel("status"));
 		uip.add(gameStatus);
 		uip.add(b1);
@@ -124,20 +126,30 @@ public class ConnectLModel extends JApplet implements MouseListener
 
 	public void mouseClicked(MouseEvent arg0)
 	{
-		int x = arg0.getX();
-
-		int col = (int)(x / (w/8));
-		int row = -1;
-
-		for (int i = 0; i < game.getRows(); i++){
-			if(game.getValueinLoc(i, col) == 0)
-				row = i;
+		if(game.getGameState() == ConnectLGame.GAME_STATE_BLACK_WON || game.getGameState() == ConnectLGame.GAME_STATE_RED_WON){
+			gameLabel.setText("Game is over. Please click 'New Game'.");
 		}
-		if (game.placeChecker(row, col)){
-			updateStatus();
-			canvas.repaint();
+		else{
+			int x = arg0.getX();
+
+			int col = (int)(x / (w/8));
+			int row = -1;
+	
+			for (int i = 0; i < game.getRows(); i++){
+				if(game.getValueinLoc(i, col) == 0)
+					row = i;
+			}
+			if (game.placeChecker(row, col)){
+				updateStatus();
+				canvas.repaint();
+				gameLabel.setText("Game in progress.");
+			}
+			else
+			{
+				gameLabel.setText("Invalid move. Please try another column.");
+			}
 		}
-	}
+	}	
 
 
 	public void mouseEntered(MouseEvent arg0) 
