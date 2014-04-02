@@ -19,6 +19,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 	int cols = 8; //game.getColumns(); // number of rows and columns for the board
 	int w, h;
 	Color playerOneColor = null, playerTwoColor = null; //Set default colors for player pieces
+	String playerOneName = null, playerTwoName = null; //Initialize player names
 
 	private class Canvas extends JPanel 
 	{
@@ -73,6 +74,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 				updateStatus();
 				canvas.repaint();
 				gameLabel.setText("Let the game begin!");
+				setPlayerNames();
 				setPlayerColors();
 			}
 			// invoke repaint command here
@@ -84,19 +86,20 @@ public class ConnectLModel extends JApplet implements MouseListener
 		game = new ConnectLGame();
 		createComponents();
 		updateStatus();
+		setPLayerNames();
 		setPlayerColors();
 	}
 	void updateStatus()
 	{
 		String status;
-		if ( game.getGameState() == ConnectLGame.GAME_STATE_BLACK_TURN)
-			status = "O's Turn!";
-		else if (game.getGameState() == ConnectLGame.GAME_STATE_RED_TURN)
-			status = " X's Turn";
-		else if (game.getGameState() == ConnectLGame.GAME_STATE_BLACK_WON )
-			status = "O is the winner";
-		else if (game.getGameState() == ConnectLGame.GAME_STATE_RED_WON )
-			status = "X is the winner"; 
+		if ( mygame.getGameState() == game.GAME_STATE_BLACK_TURN)
+			status = playerTwoName + "'s Turn!";
+		else if (mygame.getGameState() == game.GAME_STATE_RED_TURN)
+			status = playerOneName + "'s Turn";
+		else if (mygame.getGameState() == game.GAME_STATE_BLACK_WON )
+			status = playerTwoName + " is the winner!";
+		else if (mygame.getGameState() == game.GAME_STATE_RED_WON )
+			status = playerOneName + " is the winner!"; 
 		else
 			status = "Tie Game";
 		gameStatus.setText(status);
@@ -189,5 +192,12 @@ public class ConnectLModel extends JApplet implements MouseListener
 			playerTwoColor = JColorChooser.showDialog(model.this, "Player 2 Color Choice", playerTwoColor);
 		while (playerOneColor.equals(playerTwoColor)) //Disallows the same colors for players
 			playerTwoColor = JColorChooser.showDialog(model.this, "Player 1 has already chosen that color. Please select another.", playerTwoColor);
+	}
+	
+	public void setPlayerNames(){
+		while (playerOneName == null)
+			playerOneName = (String)JOptionPane.showInputDialog(model.this, "Please enter Player 1's name:", "Player 1");
+		while (playerTwoName == null)
+			playerTwoName = (String)JOptionPane.showInputDialog(model.this, "Please enter Player 2's name:", "Player 2");
 	}
 }
