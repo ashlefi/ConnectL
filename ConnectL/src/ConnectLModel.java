@@ -18,7 +18,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 	int rows = 6; //game.getRows();
 	int cols = 8; //game.getColumns(); // number of rows and columns for the board
 	int w, h;
-	Color playerOneColor = Color.WHITE, playerTwoColor = Color.BLACK; //Set default colors for player pieces
+	Color playerOneColor = null, playerTwoColor = null; //Set default colors for player pieces
 
 	private class Canvas extends JPanel 
 	{
@@ -183,10 +183,8 @@ public class ConnectLModel extends JApplet implements MouseListener
 	{}
 	
 	public void setPlayerColors(){
-		playerOneColor = JColorChooser.showDialog(model.this, "Player 1 Color Choice", playerOneColor);
 		while (playerOneColor == null) //Prevents player from cancelling out
 			playerOneColor = JColorChooser.showDialog(model.this, "Player 1 Color Choice", playerOneColor);
-		playerTwoColor = JColorChooser.showDialog(model.this, "Player 2 Color Choice", playerTwoColor);
 		while (playerTwoColor == null) //Prevents player from cancelling out
 			playerTwoColor = JColorChooser.showDialog(model.this, "Player 2 Color Choice", playerTwoColor);
 		while (playerOneColor.equals(playerTwoColor)) //Disallows the same colors for players
