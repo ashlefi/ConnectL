@@ -127,7 +127,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 
 	public void mouseClicked(MouseEvent arg0)
 	{
-		if(game.getGameState() == ConnectLGame.GAME_STATE_BLACK_WON || game.getGameState() == ConnectLGame.GAME_STATE_RED_WON){
+		if(game.getGameState() == ConnectLGame.GAME_STATE_BLACK_WON || game.getGameState() == ConnectLGame.GAME_STATE_RED_WON || game.getGameState() == ConnectLGame.GAME_STATE_TIE){
 			gameLabel.setText("Game is over. Please click 'New Game'.");
 		}
 		else{
