@@ -1,3 +1,10 @@
+/* Program 3, part II
+ * Ashley Fish, KJ Jablonowski
+ * CS 3010 TR 1PM, S14
+ * Due: 4/2/2014
+ * ConnectLDriver.java
+ */
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
