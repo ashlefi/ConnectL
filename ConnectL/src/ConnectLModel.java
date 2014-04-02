@@ -150,6 +150,10 @@ public class ConnectLModel extends JApplet implements MouseListener
 					gameLabel.setText("Are you SURE you want to put that there?");
 				else if (goof % 13 == 0)
 					gameLabel.setText("*yawn* Are we done yet...?");
+				else if (goof % 14 == 0)
+					gameLabel.setText("Gegen Dummheit gibt es keine Pillen."); //"No pills can cure stupidity."
+				else if (goof % 6 == 0)
+					gameLabel.setText("Spiel im Gange."); //"Game in progress."
 				else
 					gameLabel.setText("Game in progress.");
 			}
