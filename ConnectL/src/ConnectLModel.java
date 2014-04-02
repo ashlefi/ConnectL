@@ -60,8 +60,8 @@ public class ConnectLModel extends JApplet implements MouseListener
 			{
 				for (int j = 0; j < cols; j++) 
 				{
-					if ( (i+j)%2 == 0)  g.setColor(Color.blue);
-					else g.setColor(Color.red);
+					if ( (i+j)%2 == 0)  g.setColor(Color.white);
+					else g.setColor(Color.black);
 					g.fillRect(j*sqWid, i*sqHgt, sqWid, sqHgt);
 
 				}
