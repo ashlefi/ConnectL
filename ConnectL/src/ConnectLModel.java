@@ -18,6 +18,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 	int rows = 6; //game.getRows();
 	int cols = 8; //game.getColumns(); // number of rows and columns for the board
 	int w, h;
+	Color playerOneColor = Color.WHITE, playerTwoColor = Color.BLACK; //Set default colors for player pieces
 
 	private class Canvas extends JPanel 
 	{
@@ -49,11 +50,11 @@ public class ConnectLModel extends JApplet implements MouseListener
 			for (int r = 0; r < 6; r++) {
 				for ( int c = 0; c < 8; c++) {
 					if ( game.getValueinLoc(r, c) == ConnectLGame.MARK_BLACK) {
-						g.setColor(Color.WHITE);
+						g.setColor(playerTwoColor);
 						g.fillOval(c*w/8, r*h/6, w/8, h/6);
 					}
 					if (game.getValueinLoc(r, c) == ConnectLGame.MARK_RED) {
-						g.setColor(Color.BLACK);
+						g.setColor(playerOneColor);
 						g.fillOval(c*w/8, r*h/6, w/8, h/6);
 					}
 				}
@@ -72,6 +73,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 				updateStatus();
 				canvas.repaint();
 				gameLabel.setText("Let the game begin!");
+				setPlayerColors();
 			}
 			// invoke repaint command here
 		}
@@ -82,6 +84,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 		game = new ConnectLGame();
 		createComponents();
 		updateStatus();
+		setPlayerColors();
 	}
 	void updateStatus()
 	{
@@ -178,4 +181,11 @@ public class ConnectLModel extends JApplet implements MouseListener
 
 	public void mouseReleased(MouseEvent arg0) 
 	{}
+	
+	public void setPlayerColors(){
+		playerOneColor = JColorChooser.showDialog(ConnectLModel.this, "Player 1 Color Choice", playerOneColor);
+		playerTwoColor = JColorChooser.showDialog(ConnectLModel.this, "Player 2 Color Choice", playerTwoColor);
+		while (playerOneColor == playerTwoColor)
+			playerTwoColor = JColorChooser.showDialog(ConnectLModel.this, "Player 1 has already chosen that color. Please select another.", playerTwoColor);
+	}
 }
