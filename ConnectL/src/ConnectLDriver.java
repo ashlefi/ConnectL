@@ -134,7 +134,7 @@ public class ConnectLDriver {
 					System.out.print("| R |");
 				if(a.getValueinLoc(i,j) == a.MARK_BLACK)
 					System.out.print("| B |");
-				if(a.getValueinLoc(i,j) == a.game.MARK_NONE)
+				if(a.getValueinLoc(i,j) == a.MARK_NONE)
 					System.out.print("|   |");
 			}
 			System.out.println(" ");

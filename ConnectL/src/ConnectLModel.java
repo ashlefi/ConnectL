@@ -98,7 +98,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 	{ 
 		game = new ConnectLGame();
 		createComponents();
-		setPLayerNames();
+		setPlayerNames();
 		setPlayerColors();
 		updateStatus();
 	}
@@ -107,13 +107,13 @@ public class ConnectLModel extends JApplet implements MouseListener
 	void updateStatus()
 	{
 		String status;
-		if ( mygame.getGameState() == game.GAME_STATE_BLACK_TURN)
+		if ( game.getGameState() == ConnectLGame.GAME_STATE_BLACK_TURN)
 			status = playerTwoName + "'s Turn!";
-		else if (mygame.getGameState() == game.GAME_STATE_RED_TURN)
+		else if (game.getGameState() == ConnectLGame.GAME_STATE_RED_TURN)
 			status = playerOneName + "'s Turn";
-		else if (mygame.getGameState() == game.GAME_STATE_BLACK_WON )
+		else if (game.getGameState() == ConnectLGame.GAME_STATE_BLACK_WON )
 			status = playerTwoName + " is the winner!";
-		else if (mygame.getGameState() == game.GAME_STATE_RED_WON )
+		else if (game.getGameState() == ConnectLGame.GAME_STATE_RED_WON )
 			status = playerOneName + " is the winner!"; 
 		else
 			status = "Tie Game";
@@ -209,18 +209,18 @@ public class ConnectLModel extends JApplet implements MouseListener
 	//Function to pull up color setter dialog window
 	public void setPlayerColors(){
 		while (playerOneColor == null) //Prevents player from cancelling out
-			playerOneColor = JColorChooser.showDialog(model.this, "Player 1 Color Choice", playerOneColor);
+			playerOneColor = JColorChooser.showDialog(ConnectLModel.this, "Player 1 Color Choice", playerOneColor);
 		while (playerTwoColor == null) //Prevents player from cancelling out
-			playerTwoColor = JColorChooser.showDialog(model.this, "Player 2 Color Choice", playerTwoColor);
+			playerTwoColor = JColorChooser.showDialog(ConnectLModel.this, "Player 2 Color Choice", playerTwoColor);
 		while (playerOneColor.equals(playerTwoColor)) //Disallows the same colors for players
-			playerTwoColor = JColorChooser.showDialog(model.this, "Player 1 has already chosen that color. Please select another.", playerTwoColor);
+			playerTwoColor = JColorChooser.showDialog(ConnectLModel.this, "Player 1 has already chosen that color. Please select another.", playerTwoColor);
 	}
 	
 	//Allows players to choose names using a dialog window
 	public void setPlayerNames(){
 		while (playerOneName == null || playerOneName.equals(""))
-			playerOneName = (String)JOptionPane.showInputDialog(model.this, "Please enter Player 1's name:", "Player 1");
+			playerOneName = (String)JOptionPane.showInputDialog(ConnectLModel.this, "Please enter Player 1's name:", "Player 1");
 		while (playerTwoName == null || playerTwoName.equals(""))
-			playerTwoName = (String)JOptionPane.showInputDialog(model.this, "Please enter Player 2's name:", "Player 2");
+			playerTwoName = (String)JOptionPane.showInputDialog(ConnectLModel.this, "Please enter Player 2's name:", "Player 2");
 	}
 }
