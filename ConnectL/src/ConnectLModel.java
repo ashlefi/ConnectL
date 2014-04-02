@@ -183,9 +183,13 @@ public class ConnectLModel extends JApplet implements MouseListener
 	{}
 	
 	public void setPlayerColors(){
-		playerOneColor = JColorChooser.showDialog(ConnectLModel.this, "Player 1 Color Choice", playerOneColor);
-		playerTwoColor = JColorChooser.showDialog(ConnectLModel.this, "Player 2 Color Choice", playerTwoColor);
-		while (playerOneColor == playerTwoColor)
-			playerTwoColor = JColorChooser.showDialog(ConnectLModel.this, "Player 1 has already chosen that color. Please select another.", playerTwoColor);
+		playerOneColor = JColorChooser.showDialog(model.this, "Player 1 Color Choice", playerOneColor);
+		while (playerOneColor == null) //Prevents player from cancelling out
+			playerOneColor = JColorChooser.showDialog(model.this, "Player 1 Color Choice", playerOneColor);
+		playerTwoColor = JColorChooser.showDialog(model.this, "Player 2 Color Choice", playerTwoColor);
+		while (playerTwoColor == null) //Prevents player from cancelling out
+			playerTwoColor = JColorChooser.showDialog(model.this, "Player 2 Color Choice", playerTwoColor);
+		while (playerOneColor.equals(playerTwoColor)) //Disallows the same colors for players
+			playerTwoColor = JColorChooser.showDialog(model.this, "Player 1 has already chosen that color. Please select another.", playerTwoColor);
 	}
 }
