@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Random;
 
 import javax.swing.*;
 
@@ -142,7 +143,15 @@ public class ConnectLModel extends JApplet implements MouseListener
 			if (game.placeChecker(row, col)){
 				updateStatus();
 				canvas.repaint();
-				gameLabel.setText("Game in progress.");
+				//Code for snarky gameLabels
+				Random rand = new Random();
+				int goof = rand.nextInt(100) + 1;
+				if (goof % 7 == 0)
+					gameLabel.setText("Are you SURE you want to put that there?");
+				else if (goof % 13 == 0)
+					gameLabel.setText("*yawn* Are we done yet...?");
+				else
+					gameLabel.setText("Game in progress.");
 			}
 			else
 			{
