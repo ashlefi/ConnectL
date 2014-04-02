@@ -256,6 +256,7 @@ public class ConnectLGame
 		return;
 	}
 
+	//Returns all valid moves
 	public ArrayList<Integer> getAllPossibleMoves()
 	{
 		ArrayList<Integer> possiblemoves = new ArrayList<Integer>();

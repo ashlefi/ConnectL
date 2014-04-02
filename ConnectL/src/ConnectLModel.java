@@ -10,19 +10,22 @@ public class ConnectLModel extends JApplet implements MouseListener
 	/**
 	 * 
 	 */
+	//Global variables
 	private static final long serialVersionUID = 1L;
 	Canvas canvas;
 	JTextField gameStatus;
-	JLabel gameLabel = new JLabel("Let the game begin!", SwingConstants.LEFT);
-	ConnectLGame game;
-	int rows = 6; //game.getRows();
-	int cols = 8; //game.getColumns(); // number of rows and columns for the board
+	JLabel gameLabel = new JLabel("Let the game begin!");
+	ConnectLGame game = new ConnectLGame();
+	
+	int rows = game.getRows();
+	int cols = game.getColumns(); // number of rows and columns for the board
 	int w, h;
 	Color playerOneColor = null, playerTwoColor = null; //Set default colors for player pieces
 	String playerOneName = null, playerTwoName = null; //Initialize player names
 
 	private class Canvas extends JPanel 
 	{
+		private static final long serialVersionUID = 1L;
 
 		public void paintComponent(Graphics g) 
 		{
@@ -37,6 +40,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 			int sqWid = w/cols;
 			int sqHgt = h/rows;
 
+			//draws boards
 			for (int i=0; i < rows; i++) 
 			{
 				for (int j = 0; j < cols; j++) 
@@ -48,6 +52,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 				}
 			}
 
+			//draws player pieces, when applicable
 			for (int r = 0; r < 6; r++) {
 				for ( int c = 0; c < 8; c++) {
 					if ( game.getValueinLoc(r, c) == ConnectLGame.MARK_BLACK) {
@@ -64,18 +69,19 @@ public class ConnectLModel extends JApplet implements MouseListener
 	} // end Canvas class
 
 	private class uiHandler implements ActionListener 
-	{ // The event// listener.
+	{ // The event listener.
 		public void actionPerformed(ActionEvent e) 
 		{
 			String aC = e.getActionCommand();
+			//resets the board
 			if (aC.equals("New Game")) 
 			{
 				game = new ConnectLGame();
-				updateStatus();
 				canvas.repaint();
 				gameLabel.setText("Let the game begin!");
 				setPlayerNames();
 				setPlayerColors();
+				updateStatus();
 			}
 			// invoke repaint command here
 		}
@@ -85,10 +91,12 @@ public class ConnectLModel extends JApplet implements MouseListener
 	{ 
 		game = new ConnectLGame();
 		createComponents();
-		updateStatus();
 		setPLayerNames();
 		setPlayerColors();
+		updateStatus();
 	}
+	
+	//updates the game status for the board based on the game state
 	void updateStatus()
 	{
 		String status;
@@ -130,9 +138,10 @@ public class ConnectLModel extends JApplet implements MouseListener
 		setContentPane(content);
 	}
 
-
+	//Checks if a move is valid and places a piece if so
 	public void mouseClicked(MouseEvent arg0)
 	{
+		//Error message for clicking after game is over
 		if(game.getGameState() == ConnectLGame.GAME_STATE_BLACK_WON || game.getGameState() == ConnectLGame.GAME_STATE_RED_WON || game.getGameState() == ConnectLGame.GAME_STATE_TIE){
 			gameLabel.setText("Game is over. Please click 'New Game'.");
 		}
@@ -142,13 +151,17 @@ public class ConnectLModel extends JApplet implements MouseListener
 			int col = (int)(x / (w/8));
 			int row = -1;
 	
+			//Checks for next valid spot in column
+			//Remains -1 (invalid) if no valid spot is found
 			for (int i = 0; i < game.getRows(); i++){
 				if(game.getValueinLoc(i, col) == 0)
 					row = i;
 			}
+			
 			if (game.placeChecker(row, col)){
 				updateStatus();
 				canvas.repaint();
+				
 				//Code for snarky gameLabels
 				Random rand = new Random();
 				int goof = rand.nextInt(100) + 1;
@@ -163,6 +176,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 				else
 					gameLabel.setText("Game in progress.");
 			}
+			//If row remains -1, error message given for invalid move
 			else
 			{
 				gameLabel.setText("Invalid move. Please try another column.");
@@ -185,6 +199,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 	public void mouseReleased(MouseEvent arg0) 
 	{}
 	
+	//Function to pull up color setter dialog window
 	public void setPlayerColors(){
 		while (playerOneColor == null) //Prevents player from cancelling out
 			playerOneColor = JColorChooser.showDialog(model.this, "Player 1 Color Choice", playerOneColor);
@@ -194,10 +209,11 @@ public class ConnectLModel extends JApplet implements MouseListener
 			playerTwoColor = JColorChooser.showDialog(model.this, "Player 1 has already chosen that color. Please select another.", playerTwoColor);
 	}
 	
+	//Allows players to choose names using a dialog window
 	public void setPlayerNames(){
-		while (playerOneName == null)
+		while (playerOneName == null || playerOneName.equals(""))
 			playerOneName = (String)JOptionPane.showInputDialog(model.this, "Please enter Player 1's name:", "Player 1");
-		while (playerTwoName == null)
+		while (playerTwoName == null || playerTwoName.equals(""))
 			playerTwoName = (String)JOptionPane.showInputDialog(model.this, "Please enter Player 2's name:", "Player 2");
 	}
 }
