@@ -49,7 +49,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 			w = getWidth();
 			h = getHeight();
 
-			g.setColor( Color.BLUE);
+			g.setColor(Color.BLUE);
 			g.drawLine(10,10,200,200);
 
 			int sqWid = w/cols;
@@ -60,7 +60,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 			{
 				for (int j = 0; j < cols; j++) 
 				{
-					if ( (i+j)%2 == 0)  g.setColor(Color.white);
+					if ((i+j)%2 == 0)  g.setColor(Color.white);
 					else g.setColor(Color.black);
 					g.fillRect(j*sqWid, i*sqHgt, sqWid, sqHgt);
 
@@ -160,24 +160,22 @@ public class ConnectLModel extends JApplet implements MouseListener
 	//Checks if a move is valid and places a piece if so
 	public void mouseClicked(MouseEvent arg0)
 	{
+		System.out.println("Hello From MouseClicked");
 		//Error message for clicking after game is over
 		if(game.getGameState() == ConnectLGame.GAME_STATE_BLACK_WON || game.getGameState() == ConnectLGame.GAME_STATE_RED_WON || game.getGameState() == ConnectLGame.GAME_STATE_TIE){
 			gameLabel.setText("Game is over. Please click 'New Game'.");
+			System.out.println("Here is your problem");
 		}
+		
 		else{
+			System.out.println("Is it here?");
 			int x = arg0.getX();
 
 			int col = (int)(x / (w/8));
-			int row = -1;
-	
-			//Checks for next valid spot in column
-			//Remains -1 (invalid) if no valid spot is found
-			for (int i = 0; i < game.getRows(); i++){
-				if(game.getValueinLoc(i, col) == 0)
-					row = i;
-			}
 			
-			if (game.placeChecker(row, col)){
+			if (game.placeChecker(col))
+			{
+				System.out.println("Or maybe here");
 				updateStatus();
 				canvas.repaint();
 				
@@ -199,9 +197,11 @@ public class ConnectLModel extends JApplet implements MouseListener
 			else
 			{
 				gameLabel.setText("Invalid move. Please try another column.");
+				System.out.println("Here is a possibility too!");
 			}
 		}
-	}	
+	}
+
 
 
 	public void mouseEntered(MouseEvent arg0) 
@@ -224,7 +224,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 			p1.setColor(JColorChooser.showDialog(ConnectLModel.this, "Player 1 Color Choice", p1.getColor()));
 		while (p2.getColor() == null) //Prevents player from cancelling out
 			p2.setColor(JColorChooser.showDialog(ConnectLModel.this, "Player 2 Color Choice", p2.getColor()));
-		while ((p1.getColor()).equals(p2.getColor()) || p2.Color()) //Disallows the same colors for players
+		while ((p1.getColor()).equals(p2.getColor()) || p2.getColor() == null) //Disallows the same colors for players
 			p2.setColor(JColorChooser.showDialog(ConnectLModel.this, "Player 1 has already chosen that color. Please select another.", p2.getColor()));
 	}
 	
