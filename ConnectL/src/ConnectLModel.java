@@ -116,6 +116,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 	//updates the game status for the board based on the game state
 	void updateStatus()
 	{
+		System.out.println("DO WE EVER GET HERE?!");
 		String status;
 		if ( game.getGameState() == ConnectLGame.GAME_STATE_BLACK_TURN)
 			status = p2.getName() + "'s Turn!";
@@ -160,25 +161,20 @@ public class ConnectLModel extends JApplet implements MouseListener
 	//Checks if a move is valid and places a piece if so
 	public void mouseClicked(MouseEvent arg0)
 	{
-		System.out.println("Hello From MouseClicked");
 		//Error message for clicking after game is over
 		if(game.getGameState() == ConnectLGame.GAME_STATE_BLACK_WON || game.getGameState() == ConnectLGame.GAME_STATE_RED_WON || game.getGameState() == ConnectLGame.GAME_STATE_TIE){
 			gameLabel.setText("Game is over. Please click 'New Game'.");
-			System.out.println("Here is your problem");
 		}
 		
 		else{
-			System.out.println("Is it here?");
 			int x = arg0.getX();
 
 			int col = (int)(x / (w/8));
 			
 			if (game.placeChecker(col))
 			{
-				System.out.println("Or maybe here");
 				updateStatus();
 				canvas.repaint();
-				
 				//Code for snarky gameLabels
 				Random rand = new Random();
 				int goof = rand.nextInt(100) + 1;
@@ -193,11 +189,9 @@ public class ConnectLModel extends JApplet implements MouseListener
 				else
 					gameLabel.setText("Game in progress.");
 			}
-			//If row remains -1, error message given for invalid move
 			else
 			{
 				gameLabel.setText("Invalid move. Please try another column.");
-				System.out.println("Here is a possibility too!");
 			}
 		}
 	}
