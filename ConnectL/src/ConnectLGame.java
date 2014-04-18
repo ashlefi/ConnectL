@@ -98,39 +98,37 @@ public class ConnectLGame
 	{
 		if(c < 0 || c > columns)
 		{
-			System.out.println("false 1");
 			return false;
 		}
-		System.out.println("we're here at least in placechecker");
 		int ro = rows - 1; 
 		while(ro >= 0)
 		{
 			if(getValueinLoc(ro,c) == ConnectLGame.MARK_NONE)
 			{
-				System.out.println("Do we actually get to place a checker?");
 				if ( data[ro][c] != MARK_NONE) 
 				{
-					System.out.println("false 2");
 					return false;
 				}
 				
 				if ( gameState == GAME_STATE_BLACK_TURN) 
 				{
-					System.out.println("This should be black's turn");
 					data[ro][c] = MARK_BLACK;
 					gameState = GAME_STATE_RED_TURN;
+					updateGame();
+					return true;
 				}
 				
 				else if ( gameState == GAME_STATE_RED_TURN) 
 				{
-					System.out.println("This should be red's turn");
 					data[ro][c] = MARK_RED;
 					gameState = GAME_STATE_BLACK_TURN;
+					updateGame();
+					return true;
 				}
 			}
+			ro--;
 		}
-		updateGame();// winner?, tie?
-		return true;  // move was successfully made
+		return false; //the move was not valid
 	}
 
 
@@ -331,10 +329,18 @@ public class ConnectLGame
 			else
 				return -1000;
 
-		// to do
-
+		if(gameState == GAME_STATE_RED_TURN)
+			if(maxPlayer == MARK_RED)
+			{	
+			}
 		
 		return score;
+	}
+	
+	public int evaluateMinis(int s)
+	{
+		
+		return s; 
 	}
 
 }// end of class ConnectLGame
