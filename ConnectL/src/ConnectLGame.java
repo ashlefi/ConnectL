@@ -33,6 +33,22 @@ public class ConnectLGame
 	{
 		reset (); // resets the gameboard
 	}
+	
+	
+	/*Copy constructor that allows
+	 * the AI player to make decisions
+	 * based on a copied version  of the
+	 * gameboard.  
+	 */
+	public ConnectLGame(ConnectLGame copy) 
+	{
+		for (int x = 0; x < rows; x++) {
+			for (int y = 0; y < columns; y++) {
+				data [x][y] = copy.data[x][y];
+			}
+		}
+		gameState = copy.gameState;
+	}
 
 	/**
 	 * board array is cleared
@@ -78,23 +94,41 @@ public class ConnectLGame
 	/*Leaves a player identification mark in the 
 	 * row and column given. If it is not a valid 
 	 * move, nothing is marked. */
-	public boolean placeChecker (int r, int c) {
-		if ( r < 0 || r > rows || c < 0 || c > columns) 
-			return false;
-		if ( data[r][c] != MARK_NONE) 
-			return false;
-
-		if ( gameState == GAME_STATE_BLACK_TURN) 
+	public boolean placeChecker (int c) 
+	{
+		if(c < 0 || c > columns)
 		{
-			data[r][c] = MARK_BLACK;
-			gameState = GAME_STATE_RED_TURN;
+			System.out.println("false 1");
+			return false;
 		}
-		else if ( gameState == GAME_STATE_RED_TURN) 
+		System.out.println("we're here at least in placechecker");
+		int ro = rows - 1; 
+		while(ro >= 0)
 		{
-			data[r][c] = MARK_RED;
-			gameState = GAME_STATE_BLACK_TURN;
+			if(getValueinLoc(ro,c) == ConnectLGame.MARK_NONE)
+			{
+				System.out.println("Do we actually get to place a checker?");
+				if ( data[ro][c] != MARK_NONE) 
+				{
+					System.out.println("false 2");
+					return false;
+				}
+				
+				if ( gameState == GAME_STATE_BLACK_TURN) 
+				{
+					System.out.println("This should be black's turn");
+					data[ro][c] = MARK_BLACK;
+					gameState = GAME_STATE_RED_TURN;
+				}
+				
+				else if ( gameState == GAME_STATE_RED_TURN) 
+				{
+					System.out.println("This should be red's turn");
+					data[ro][c] = MARK_RED;
+					gameState = GAME_STATE_BLACK_TURN;
+				}
+			}
 		}
-
 		updateGame();// winner?, tie?
 		return true;  // move was successfully made
 	}
@@ -264,18 +298,43 @@ public class ConnectLGame
 	}
 
 	//Returns all valid moves
-	public ArrayList<Integer> getAllPossibleMoves()
+	ArrayList<ConnectLMove> getAllPossibleMoves()
 	{
-		ArrayList<Integer> possiblemoves = new ArrayList<Integer>();
+		ArrayList<ConnectLMove> possiblemoves = new ArrayList<ConnectLMove>();
 
 		for(int j = 0; j < columns; j++)
 		{
 			if(data[0][j] == MARK_NONE)
-				possiblemoves.add(j);
+				possiblemoves.add(new ConnectLMove(j,0));
 		}
 
 		return possiblemoves;
 	}
+	
+	public int staticEvaluation(int maxPlayer, int minPlayer, int depth) 
+	{
+		int score =  0;
 
+		if (gameState == GAME_STATE_TIE)
+			return 0;
+		
+		if (gameState == GAME_STATE_BLACK_WON)
+		{
+			if (maxPlayer == MARK_BLACK)
+				return 1000;
+			else 
+				return -1000;
+		}
+		if (gameState == GAME_STATE_RED_WON)
+			if (maxPlayer == MARK_RED)
+				return 1000;
+			else
+				return -1000;
+
+		// to do
+
+		
+		return score;
+	}
 
 }// end of class ConnectLGame
