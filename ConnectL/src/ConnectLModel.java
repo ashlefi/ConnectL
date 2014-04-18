@@ -36,7 +36,8 @@ public class ConnectLModel extends JApplet implements MouseListener
 	int w, h;
 	
 	CLhumanPlayer p1 = new CLhumanPlayer();
-	CLhumanPlayer p2 = new CLhumanPlayer();
+	CLaiPlayer p2 = new CLaiPlayer();
+	boolean isAI = true; //Eventually player can select human or AI opponent
 
 	private class Canvas extends JPanel 
 	{
@@ -93,7 +94,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 			{
 				game = new ConnectLGame();
 				p1 = new CLhumanPlayer();
-				p2 = new CLhumanPlayer();
+				p2 = new CLaiPlayer();
 				canvas.repaint();
 				gameLabel.setText("Let the game begin!");
 				setPlayerNames();
@@ -144,7 +145,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 
 		JButton b1 = new JButton("New Game");
 		uip.add(gameLabel);
-		uip.add( new JLabel("status"));
+		uip.add( new JLabel("Game status:"));
 		uip.add(gameStatus);
 		uip.add(b1);
 
@@ -188,6 +189,8 @@ public class ConnectLModel extends JApplet implements MouseListener
 					gameLabel.setText("Spiel im Gange."); //"Game in progress."
 				else
 					gameLabel.setText("Game in progress.");
+				if (isAI)
+					computerMove();
 			}
 			else
 			{
@@ -228,5 +231,10 @@ public class ConnectLModel extends JApplet implements MouseListener
 			p1.setName((String)JOptionPane.showInputDialog(ConnectLModel.this, "Please enter Player 1's name:", "Player 1"));
 		while (p2.getName() == null || (p2.getName()).equals(""))
 			p2.setName((String)JOptionPane.showInputDialog(ConnectLModel.this, "Please enter Player 2's name:", "Player 2"));
+	}
+	
+	private void computerMove(){
+		p2.play(game, 2);
+		updateStatus();
 	}
 }

@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class CLaiPlayer 
+public class CLaiPlayer extends ConnectLPlayer
 {
 	//once initialized, the class cannot change who is min or max.
 	static int whosMax, whosMin;
