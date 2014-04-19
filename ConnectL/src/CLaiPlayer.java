@@ -56,13 +56,14 @@ public class CLaiPlayer extends ConnectLPlayer
 	//minimax borrowed from code provided by instructor
 	public static int minimax(ConnectLGame game, int depth) 
 	{
+		int d = depth;
 
 		if ( game.getGameState() == ConnectLGame.GAME_STATE_BLACK_WON ||
 				game.getGameState() == ConnectLGame.GAME_STATE_RED_WON ||
 				game.getGameState() == ConnectLGame.GAME_STATE_TIE ||
 				depth == 0 )
 		{
-			int val = game.staticEvaluation(whosMax, whosMin,depth+1);
+			int val = game.staticEvaluation(whosMax, whosMin,d+1);
 			return val;
 		}
 	
@@ -79,7 +80,7 @@ public class CLaiPlayer extends ConnectLPlayer
 
 			gcopy.placeChecker(c);  // make the move
 
-			score = minimax( gcopy, depth-1);
+			score = minimax( gcopy, d-1);
 
 			mvs.get(i).value = score;
 
