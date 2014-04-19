@@ -14,7 +14,7 @@ public class CLaiPlayer extends ConnectLPlayer
 
 	public static void play(ConnectLGame game, int depth) 
 	{
-		
+		System.out.println(depth);
 		//Determine who is min and who is max based on current gamestate
 		if(game.getGameState() ==  ConnectLGame.GAME_STATE_RED_TURN) 
 		{
@@ -51,19 +51,18 @@ public class CLaiPlayer extends ConnectLPlayer
 		}
 
 		game.placeChecker(best.col);
-	}
+	}                            
 
 	//minimax borrowed from code provided by instructor
 	public static int minimax(ConnectLGame game, int depth) 
 	{
-		int d = depth;
 
 		if ( game.getGameState() == ConnectLGame.GAME_STATE_BLACK_WON ||
 				game.getGameState() == ConnectLGame.GAME_STATE_RED_WON ||
 				game.getGameState() == ConnectLGame.GAME_STATE_TIE ||
 				depth == 0 )
 		{
-			int val = game.staticEvaluation(whosMax, whosMin,d+1);
+			int val = game.staticEvaluation(whosMax, whosMin);
 			return val;
 		}
 	
@@ -80,7 +79,7 @@ public class CLaiPlayer extends ConnectLPlayer
 
 			gcopy.placeChecker(c);  // make the move
 
-			score = minimax( gcopy, d-1);
+			score = minimax( gcopy, depth - 1);
 
 			mvs.get(i).value = score;
 

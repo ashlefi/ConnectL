@@ -308,8 +308,7 @@ public class ConnectLGame
 
 		return possiblemoves;
 	}
-	
-	public int staticEvaluation(int maxPlayer, int minPlayer, int depth) 
+	public int staticEvaluation(int maxPlayer, int minPlayer) //took out depth in staticEvaluation.
 	{
 		int score =  0;
 
@@ -333,15 +332,11 @@ public class ConnectLGame
 		{
 			if(maxPlayer == MARK_RED)
 				score = evaluateMinis(maxPlayer, minPlayer);
-			else
-				score = score*-1;
 		}
 		if(gameState == GAME_STATE_BLACK_TURN)
 		{
 			if(maxPlayer == MARK_BLACK)
 				score = evaluateMinis(maxPlayer, minPlayer);
-			else
-				score = score*-1;
 		}
 		return score;
 	}
@@ -350,7 +345,7 @@ public class ConnectLGame
 	public int evaluateMinis(int maxplayer, int minplayer)
 	{
 		ArrayList<Integer> slist = new ArrayList<Integer>();
-		int s =0;
+		int s = 0;
 		int bestscore;
 		
 		int[][] temp = new int[2][3];
@@ -366,8 +361,26 @@ public class ConnectLGame
 					}
 				
 				}
-				if (temp[0][0] == maxplayer && temp[0][1] == maxplayer && temp[0][2] == maxplayer) s = 100;
+			
+				if(temp[0][0] == maxplayer) s += 50;
+				System.out.println(maxplayer + " is player" + " what's stored " + temp[0][0]);
+				if(temp[0][1] == maxplayer) s += 60;
+				if(temp[0][2] == maxplayer) s += 50;
+				if(temp[1][0] == maxplayer) s += 50;
+				if(temp[1][1] == maxplayer) s += 60;
+				if(temp[1][2] == maxplayer) s += 50;
+				if(temp[0][0] == maxplayer && temp[0][1] == maxplayer && temp[0][2] == maxplayer) s = 200;
+				//System.out.println(s);
 				
+				if(temp[0][0] == minplayer) s -= 50;
+				if(temp[0][1] == minplayer) s -= 60;
+				if(temp[0][2] == minplayer) s -= 50;
+				if(temp[1][0] == minplayer) s -= 50;
+				if(temp[1][1] == minplayer) s -= 60;
+				if(temp[1][2] == minplayer) s -= 50;
+				if(temp[0][0] == minplayer && temp[0][1] == minplayer && temp[0][2] == minplayer) s -= 200;
+				
+				//System.out.println(s);
 				slist.add(s);
 				s = 0;
 			}
@@ -385,6 +398,7 @@ public class ConnectLGame
 		
 		return holder;
 	}
+
 
 
 }// end of class ConnectLGame
