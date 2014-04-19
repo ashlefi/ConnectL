@@ -101,12 +101,12 @@ public class ConnectLModel extends JApplet implements MouseListener
 				gameLabel.setText("Let the game begin!");
 				setPlayerNames();
 				setPlayerColors();
-				aiSelect.setEditable(true);
+				aiSelect.setEnabled(true);
 				updateStatus();
 			}
 			// invoke repaint command here
-			JComboBox cb = (JComboBox)e.getSource();
-	        int dep = cb.getSelectedIndex() + 1;
+			if (aC.equals("comboBoxChanged"))
+				dep = aiSelect.getSelectedIndex() + 1;
 		}
 	} // end uiHandler class
 
@@ -154,7 +154,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 		aiSelect = new JComboBox(difficulty);
 		aiSelect.setEditable(false);
 		aiSelect.setEnabled(true);
-		aiSelect.setSelectedIndex(2);
+		aiSelect.setSelectedIndex(-1);		//Initializes to a blank box
 		uip.add(new JLabel("Computer Level:"));
 		uip.add(aiSelect);
 		uip.add(gameLabel);
@@ -176,44 +176,45 @@ public class ConnectLModel extends JApplet implements MouseListener
 	//Checks if a move is valid and places a piece if so
 	public void mouseClicked(MouseEvent arg0)
 	{
-		aiSelect.setEnabled(false);		//Turns off AI difficulty selection box
-		int dep = (int) aiSelect.getSelectedIndex();
+		if (dep != 0){
+			aiSelect.setEnabled(false);		//Turns off AI difficulty selection box
 		
- 		//Error message for clicking after game is over
-		if(game.getGameState() == ConnectLGame.GAME_STATE_BLACK_WON || game.getGameState() == ConnectLGame.GAME_STATE_RED_WON || game.getGameState() == ConnectLGame.GAME_STATE_TIE){
-			gameLabel.setText("Game is over. Please click 'New Game'.");
-		}
-		
-		else{
-			int x = arg0.getX();
-
-			int col = (int)(x / (w/8));
-			
-			if (game.placeChecker(col))
-			{
-				updateStatus();
-				canvas.repaint();
-				//Code for snarky gameLabels
-				Random rand = new Random();
-				int goof = rand.nextInt(100) + 1;
-				if (game.getGameState() == ConnectLGame.GAME_STATE_TIE)
-					gameLabel.setText("You both lose.");
-				else if (goof % 7 == 0)
-					gameLabel.setText("Are you SURE you want to put that there?");
-				else if (goof % 13 == 0)
-					gameLabel.setText("*yawn* Are we done yet...?");
-				else if (goof % 15 == 0)
-					gameLabel.setText("Gegen Dummheit gibt es keine Pillen."); //"No pills can cure stupidity."
-				else if (goof % 6 == 0)
-					gameLabel.setText("Spiel im Gange."); //"Game in progress."
-				else
-					gameLabel.setText("Game in progress.");
-				if (isAI)
-					computerMove();
+			//Error message for clicking after game is over
+			if(game.getGameState() == ConnectLGame.GAME_STATE_BLACK_WON || game.getGameState() == ConnectLGame.GAME_STATE_RED_WON || game.getGameState() == ConnectLGame.GAME_STATE_TIE){
+				gameLabel.setText("Game is over. Please click 'New Game'.");
 			}
-			else
-			{
-				gameLabel.setText("Invalid move. Please try another column.");
+		
+			else{
+				int x = arg0.getX();
+
+				int col = (int)(x / (w/8));
+			
+				if (game.placeChecker(col))
+				{
+					updateStatus();
+					canvas.repaint();
+					//Code for snarky gameLabels
+					Random rand = new Random();
+					int goof = rand.nextInt(100) + 1;
+					if (game.getGameState() == ConnectLGame.GAME_STATE_TIE)
+						gameLabel.setText("You both lose.");
+					else if (goof % 7 == 0)
+						gameLabel.setText("Are you SURE you want to put that there?");
+					else if (goof % 13 == 0)
+						gameLabel.setText("*yawn* Are we done yet...?");
+					else if (goof % 15 == 0)
+						gameLabel.setText("Gegen Dummheit gibt es keine Pillen."); //"No pills can cure stupidity."
+					else if (goof % 6 == 0)
+						gameLabel.setText("Spiel im Gange."); //"Game in progress."
+					else
+						gameLabel.setText("Game in progress.");
+					if (isAI)
+						computerMove();
+				}
+				else
+				{
+					gameLabel.setText("Invalid move. Please try another column.");
+				}
 			}
 		}
 	}
@@ -253,7 +254,6 @@ public class ConnectLModel extends JApplet implements MouseListener
 	}
 	
 	private void computerMove(){
-		System.out.println(dep);
 		p2.play(game, dep);
 		updateStatus();
 	}
