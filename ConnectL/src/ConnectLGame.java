@@ -330,12 +330,19 @@ public class ConnectLGame
 				return -1000;
 
 		if(gameState == GAME_STATE_RED_TURN)
+		{
 			if(maxPlayer == MARK_RED)
-			{	
-				
-				
-				
-			}
+				score = evaluateMinis(maxPlayer, minPlayer);
+			else
+				score = score*-1;
+		}
+		if(gameState == GAME_STATE_BLACK_TURN)
+		{
+			if(maxPlayer == MARK_BLACK)
+				score = evaluateMinis(maxPlayer, minPlayer);
+			else
+				score = score*-1;
+		}
 		return score;
 	}
 
