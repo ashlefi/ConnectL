@@ -368,7 +368,6 @@ public class ConnectLGame
 				if(temp[1][1] == maxplayer) s += 60;
 				if(temp[1][2] == maxplayer) s += 50;
 				if(temp[0][0] == maxplayer && temp[0][1] == maxplayer && temp[0][2] == maxplayer) s = 200;
-				//System.out.println(s);
 				
 				if(temp[0][0] == minplayer) s -= 50;
 				if(temp[0][1] == minplayer) s -= 60;
@@ -378,7 +377,6 @@ public class ConnectLGame
 				if(temp[1][2] == minplayer) s -= 50;
 				if(temp[0][0] == minplayer && temp[0][1] == minplayer && temp[0][2] == minplayer) s -= 200;
 				
-				System.out.println(s);
 				slist.add(s);
 				s = 0;
 			}
