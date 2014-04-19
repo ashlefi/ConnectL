@@ -332,13 +332,29 @@ public class ConnectLGame
 		if(gameState == GAME_STATE_RED_TURN)
 			if(maxPlayer == MARK_RED)
 			{	
+				
+				
+				
 			}
 		
 		return score;
 	}
 	
-	public int evaluateMinis(int s)
+	public int evaluateMinis(int s, int maxplayer, int minplayer)
 	{
+	
+		int[][] temp = new int[2][3];
+		
+		for(int i = 0; i < 2; i++)
+		{
+			for(int j = 0; j < 3; j++)
+			{
+				temp[i][j] = data[i][j];
+			}
+		}
+		if (temp[0][0] == maxplayer && temp[0][1] == maxplayer && temp[0][2] == maxplayer) s = 100;
+		
+			
 		
 		return s; 
 	}
