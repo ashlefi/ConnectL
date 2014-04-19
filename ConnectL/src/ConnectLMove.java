@@ -1,5 +1,13 @@
+/* Program 3, part III
+ * Ashley Fish, KJ Jablonowski
+ * CS 3010 TR 1PM, S14
+ * Due: 4/18/2014
+ * ConnectLMove.java
+ */
+
 public class ConnectLMove 
 {
+	//Describes the column and minimax value of a move
 	public int col;
 	public int value;
 

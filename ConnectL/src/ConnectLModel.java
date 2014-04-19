@@ -1,14 +1,7 @@
-/* Program 3, part II
+/* Program 3, part III
  * Ashley Fish, KJ Jablonowski
  * CS 3010 TR 1PM, S14
- * Due: 4/2/2014
- * ConnectLModel.java
- */
-
-/* Program 3, part II
- * Ashley Fish, KJ Jablonowski
- * CS 3010 TR 1PM, S14
- * Due: 4/2/2014
+ * Due: 4/18/2014
  * ConnectLModel.java
  */
 
@@ -104,7 +97,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 				aiSelect.setEnabled(true);
 				updateStatus();
 			}
-			// invoke repaint command here
+			//Sets AI difficulty when different choice is selected
 			if (aC.equals("comboBoxChanged"))
 				dep = aiSelect.getSelectedIndex() + 1;
 		}
@@ -176,7 +169,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 	//Checks if a move is valid and places a piece if so
 	public void mouseClicked(MouseEvent arg0)
 	{
-		if (dep != 0){
+		if (dep != 0){						//Prevents player from starting the game before choosing AI difficulty
 			aiSelect.setEnabled(false);		//Turns off AI difficulty selection box
 		
 			//Error message for clicking after game is over
@@ -208,8 +201,8 @@ public class ConnectLModel extends JApplet implements MouseListener
 						gameLabel.setText("Spiel im Gange."); //"Game in progress."
 					else
 						gameLabel.setText("Game in progress.");
-					if (isAI)
-						computerMove();
+					if (isAI)					//After the human player clicks,
+						computerMove();			//AI player makes its moves
 				}
 				else
 				{
@@ -253,6 +246,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 			p2.setName((String)JOptionPane.showInputDialog(ConnectLModel.this, "Please enter Player 2's name:", "Player 2"));
 	}
 	
+	//Calls play function for AI move
 	private void computerMove(){
 		p2.play(game, dep);
 		updateStatus();

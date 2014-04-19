@@ -1,7 +1,7 @@
-/* Program 3, part II
+/* Program 3, part III
  * Ashley Fish, KJ Jablonowski
  * CS 3010 TR 1PM, S14
- * Due: 4/2/2014
+ * Due: 4/18/2014
  * ConnectLGame.java
  */
 

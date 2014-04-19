@@ -1,3 +1,10 @@
+/* Program 3, part III
+ * Ashley Fish, KJ Jablonowski
+ * CS 3010 TR 1PM, S14
+ * Due: 4/18/2014
+ * CLaiPlayer.java
+ */
+
 import java.util.ArrayList;
 
 public class CLaiPlayer extends ConnectLPlayer
@@ -46,6 +53,7 @@ public class CLaiPlayer extends ConnectLPlayer
 		game.placeChecker(best.col);
 	}
 
+	//minimax borrowed from code provided by instructor
 	public static int minimax(ConnectLGame game, int depth) 
 	{
 
