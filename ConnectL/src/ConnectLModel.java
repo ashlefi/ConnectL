@@ -30,6 +30,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 	JTextField gameStatus;
 	JLabel gameLabel = new JLabel("Let the game begin!");
 	ConnectLGame game = new ConnectLGame();
+	JComboBox aiSelect;
 	
 	int rows = game.getRows();
 	int cols = game.getColumns(); // number of rows and columns for the board
@@ -37,7 +38,8 @@ public class ConnectLModel extends JApplet implements MouseListener
 	
 	CLhumanPlayer p1 = new CLhumanPlayer();
 	CLaiPlayer p2 = new CLaiPlayer();
-	boolean isAI = true; //Eventually player can select human or AI opponent
+	boolean isAI = true;	//Eventually player can select human or AI opponent
+	int dep;				//Selects AI difficulty
 
 	private class Canvas extends JPanel 
 	{
@@ -99,10 +101,12 @@ public class ConnectLModel extends JApplet implements MouseListener
 				gameLabel.setText("Let the game begin!");
 				setPlayerNames();
 				setPlayerColors();
-				setaiDifficulty();
+				aiSelect.setEditable(true);
 				updateStatus();
 			}
 			// invoke repaint command here
+			JComboBox cb = (JComboBox)e.getSource();
+	        int dep = cb.getSelectedIndex() + 1;
 		}
 	} // end uiHandler class
 
@@ -112,14 +116,12 @@ public class ConnectLModel extends JApplet implements MouseListener
 		createComponents();
 		setPlayerNames();
 		setPlayerColors();
-		setaiDifficulty();
 		updateStatus();
 	}
 	
 	//updates the game status for the board based on the game state
 	void updateStatus()
 	{
-		System.out.println("DO WE EVER GET HERE?!");
 		String status;
 		if ( game.getGameState() == ConnectLGame.GAME_STATE_BLACK_TURN)
 			status = p2.getName() + "'s Turn!";
@@ -131,7 +133,6 @@ public class ConnectLModel extends JApplet implements MouseListener
 			status = p1.getName() + " is the winner!"; 
 		else{
 			status = "Tie Game";
-			//gameLabel.setText("You both lose.");
 		}
 		gameStatus.setText(status);
 	}
@@ -144,14 +145,25 @@ public class ConnectLModel extends JApplet implements MouseListener
 		JPanel uip = new JPanel();
 		uip.setLayout(new FlowLayout()); 
 		gameStatus  = new JTextField(12);
+		
+		//AI level choices
+		String[] difficulty = { "Easy", "Normal", "Hard"};
 
 		JButton b1 = new JButton("New Game");
+		//Adds Computer selection to panel
+		aiSelect = new JComboBox(difficulty);
+		aiSelect.setEditable(false);
+		aiSelect.setEnabled(true);
+		aiSelect.setSelectedIndex(2);
+		uip.add(new JLabel("Computer Level:"));
+		uip.add(aiSelect);
 		uip.add(gameLabel);
 		uip.add( new JLabel("Game status:"));
 		uip.add(gameStatus);
 		uip.add(b1);
 
 		b1.addActionListener( new uiHandler());
+		aiSelect.addActionListener(new uiHandler());
 
 		canvas = new Canvas();
 		canvas.setBackground(new Color(210, 180, 140));
@@ -164,7 +176,10 @@ public class ConnectLModel extends JApplet implements MouseListener
 	//Checks if a move is valid and places a piece if so
 	public void mouseClicked(MouseEvent arg0)
 	{
-		//Error message for clicking after game is over
+		aiSelect.setEnabled(false);		//Turns off AI difficulty selection box
+		int dep = (int) aiSelect.getSelectedIndex();
+		
+ 		//Error message for clicking after game is over
 		if(game.getGameState() == ConnectLGame.GAME_STATE_BLACK_WON || game.getGameState() == ConnectLGame.GAME_STATE_RED_WON || game.getGameState() == ConnectLGame.GAME_STATE_TIE){
 			gameLabel.setText("Game is over. Please click 'New Game'.");
 		}
@@ -181,7 +196,9 @@ public class ConnectLModel extends JApplet implements MouseListener
 				//Code for snarky gameLabels
 				Random rand = new Random();
 				int goof = rand.nextInt(100) + 1;
-				if (goof % 7 == 0)
+				if (game.getGameState() == ConnectLGame.GAME_STATE_TIE)
+					gameLabel.setText("You both lose.");
+				else if (goof % 7 == 0)
 					gameLabel.setText("Are you SURE you want to put that there?");
 				else if (goof % 13 == 0)
 					gameLabel.setText("*yawn* Are we done yet...?");
@@ -235,19 +252,9 @@ public class ConnectLModel extends JApplet implements MouseListener
 			p2.setName((String)JOptionPane.showInputDialog(ConnectLModel.this, "Please enter Player 2's name:", "Player 2"));
 	}
 	
-	public void setaiDifficulty()
-	{
-		int dep = 0;
-		String[] difficulty = { "Easy", "Normal", "Hard"};
-
-		JComboBox select = new JComboBox(difficulty);
-		select.setSelectedIndex(2);
-//		select.addActionListener((ActionListener) this);
-		
-	}
-	
 	private void computerMove(){
-		p2.play(game, 2);
+		System.out.println(dep);
+		p2.play(game, dep);
 		updateStatus();
 	}
 }
