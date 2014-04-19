@@ -355,15 +355,13 @@ public class ConnectLGame
 			{
 				for(int i = 0; i < 2; i++)
 				{
-					for(int j = 0; j < 3; j++)
-					{
-						temp[i][j] = data[i][j];
-					}
-				
+						for(int j = 0; j < 3; j++)
+						{
+							temp[i][j] = data[i+w][j+x];
+						}
 				}
 			
 				if(temp[0][0] == maxplayer) s += 50;
-				System.out.println(maxplayer + " is player" + " what's stored " + temp[0][0]);
 				if(temp[0][1] == maxplayer) s += 60;
 				if(temp[0][2] == maxplayer) s += 50;
 				if(temp[1][0] == maxplayer) s += 50;
@@ -380,7 +378,7 @@ public class ConnectLGame
 				if(temp[1][2] == minplayer) s -= 50;
 				if(temp[0][0] == minplayer && temp[0][1] == minplayer && temp[0][2] == minplayer) s -= 200;
 				
-				//System.out.println(s);
+				System.out.println(s);
 				slist.add(s);
 				s = 0;
 			}
