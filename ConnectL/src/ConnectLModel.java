@@ -99,6 +99,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 				gameLabel.setText("Let the game begin!");
 				setPlayerNames();
 				setPlayerColors();
+				setaiDifficulty();
 				updateStatus();
 			}
 			// invoke repaint command here
@@ -111,6 +112,7 @@ public class ConnectLModel extends JApplet implements MouseListener
 		createComponents();
 		setPlayerNames();
 		setPlayerColors();
+		setaiDifficulty();
 		updateStatus();
 	}
 	
@@ -233,8 +235,20 @@ public class ConnectLModel extends JApplet implements MouseListener
 			p2.setName((String)JOptionPane.showInputDialog(ConnectLModel.this, "Please enter Player 2's name:", "Player 2"));
 	}
 	
+	public void setaiDifficulty()
+	{
+		int dep = 0;
+		String[] difficulty = { "Easy", "Normal", "Hard"};
+
+		JComboBox select = new JComboBox(difficulty);
+		select.setSelectedIndex(2);
+//		select.addActionListener((ActionListener) this);
+		
+	}
+	
 	private void computerMove(){
 		p2.play(game, 2);
 		updateStatus();
 	}
 }
+
