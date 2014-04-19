@@ -336,27 +336,48 @@ public class ConnectLGame
 				
 				
 			}
-		
 		return score;
 	}
+
 	
-	public int evaluateMinis(int s, int maxplayer, int minplayer)
+	public int evaluateMinis(int maxplayer, int minplayer)
 	{
-	
-		int[][] temp = new int[2][3];
+		ArrayList<Integer> slist = new ArrayList<Integer>();
+		int s =0;
+		int bestscore;
 		
-		for(int i = 0; i < 2; i++)
+		int[][] temp = new int[2][3];
+		for(int w = 0; w < rows - 2; w++)
 		{
-			for(int j = 0; j < 3; j++)
+			for(int x = 0; x < columns - 3; x++)
 			{
-				temp[i][j] = data[i][j];
+				for(int i = 0; i < 2; i++)
+				{
+					for(int j = 0; j < 3; j++)
+					{
+						temp[i][j] = data[i][j];
+					}
+				
+				}
+				if (temp[0][0] == maxplayer && temp[0][1] == maxplayer && temp[0][2] == maxplayer) s = 100;
+				
+				slist.add(s);
+				s = 0;
 			}
 		}
-		if (temp[0][0] == maxplayer && temp[0][1] == maxplayer && temp[0][2] == maxplayer) s = 100;
-		
-			
-		
-		return s; 
+		bestscore = search(slist);
+		return bestscore; 
 	}
+	
+	public int search(ArrayList<Integer> moveScores) {
+		int holder = -1;
+		
+		for(int i = 0; i < moveScores.size(); i++)
+			if (moveScores.get(i) > holder)
+				holder = moveScores.get(i);
+		
+		return holder;
+	}
+
 
 }// end of class ConnectLGame
