@@ -341,7 +341,15 @@ public class ConnectLGame
 		return score;
 	}
 
-	
+	/*Uses for loops to search over the board in boxes of 2x6. The 2X6
+	 * moves over one space for each iteration of the outer for loops. 
+	 * This allows there to be overlapping to account for how much bigger 
+	 * actual gameboard is over how big the miniboxes are. For each 2x6
+	 * box, a score is evaluated and stored in an array. When the for loops
+	 * are finished, there is a search algorithm to make sure that the most
+	 * beneficial score is picked. Returns that score to the score in the 
+	 * staticEvaluation function.
+	 */
 	public int evaluateMinis(int maxplayer, int minplayer)
 	{
 		ArrayList<Integer> slist = new ArrayList<Integer>();
@@ -361,21 +369,19 @@ public class ConnectLGame
 						}
 				}
 			
-				if(temp[0][0] == maxplayer) s += 50;
-				if(temp[0][1] == maxplayer) s += 60;
-				if(temp[0][2] == maxplayer) s += 50;
+				if(temp[0][0] == maxplayer) s += 60;
+				if(temp[0][1] == maxplayer) s += 100;
+				if(temp[0][2] == maxplayer) s += 70;
 				if(temp[1][0] == maxplayer) s += 50;
 				if(temp[1][1] == maxplayer) s += 60;
-				if(temp[1][2] == maxplayer) s += 50;
-				if(temp[0][0] == maxplayer && temp[0][1] == maxplayer && temp[0][2] == maxplayer) s = 200;
+				if(temp[1][2] == maxplayer) s += 70;
 				
-				if(temp[0][0] == minplayer) s -= 50;
-				if(temp[0][1] == minplayer) s -= 60;
-				if(temp[0][2] == minplayer) s -= 50;
+				if(temp[0][0] == minplayer) s -= 60;
+				if(temp[0][1] == minplayer) s -= 100;
+				if(temp[0][2] == minplayer) s -= 70;
 				if(temp[1][0] == minplayer) s -= 50;
 				if(temp[1][1] == minplayer) s -= 60;
-				if(temp[1][2] == minplayer) s -= 50;
-				if(temp[0][0] == minplayer && temp[0][1] == minplayer && temp[0][2] == minplayer) s -= 200;
+				if(temp[1][2] == minplayer) s -= 70;
 				
 				slist.add(s);
 				s = 0;
