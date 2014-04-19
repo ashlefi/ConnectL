@@ -5,6 +5,7 @@
  * ConnectLMove.java
  */
 
+//Borrowed from in class example
 public class ConnectLMove 
 {
 	//Describes the column and minimax value of a move
